@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketGymTrainer.Contracts", "PocketGymTrainer.Contracts\PocketGymTrainer.Contracts.csproj", "{C698E4B0-D162-400D-AF38-51EA8D1690DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketGymTrainer", "PocketGymTrainer\PocketGymTrainer.csproj", "{F83EB65B-5F58-43DF-9946-32099A545940}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C698E4B0-D162-400D-AF38-51EA8D1690DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C698E4B0-D162-400D-AF38-51EA8D1690DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C698E4B0-D162-400D-AF38-51EA8D1690DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C698E4B0-D162-400D-AF38-51EA8D1690DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83EB65B-5F58-43DF-9946-32099A545940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83EB65B-5F58-43DF-9946-32099A545940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83EB65B-5F58-43DF-9946-32099A545940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83EB65B-5F58-43DF-9946-32099A545940}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
