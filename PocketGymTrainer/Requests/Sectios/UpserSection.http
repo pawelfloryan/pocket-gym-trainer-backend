@@ -1,0 +1,8 @@
+@id = a18b533d-d318-44e0-8834-01c96cba7a20
+
+PUT http://localhost:5202/sections/{{id}}
+Content-Type: application/json
+
+{
+    "name": "BACK"
+}

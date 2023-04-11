@@ -1,4 +1,4 @@
-namespace PocketGymTrainer.Contracts.Trainer;
+namespace PocketGymTrainer.Contracts.Section;
 
 public record CreateSectionRequest(
     string name

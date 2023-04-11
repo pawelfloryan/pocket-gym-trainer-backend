@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "iTWk25ElOtBkqN2QGM6iEnQCJzSrHHEJiHcp1xEpJKFqJNose3nlX0qX9iBf2WwhAJpAoAEzQ9Er5PpaS/Z0Xg==",
+  "dgSpecHash": "zQ2isv4BAJBeg+jAtQolGbgJKDhU+vtHjvS6dZzFo2jbtsJu8Bgpw2OVOwLnH7C2QAGWtTgp9U9EwEBBj0uNkA==",
   "success": true,
   "projectFilePath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
   "expectedPackageFiles": [
+    "/home/pawel/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/home/pawel/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/pawel/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/home/pawel/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
