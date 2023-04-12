@@ -17,4 +17,17 @@ public static class Errors
             description: "Section not found"
         );
     }
+
+    public static class Exercise
+    {
+        public static Error InvalidName => Error.Validation(
+            code: "Exercise.NotFound",
+            description: $"Exercise name must be at least {Models.Exercise.MinNameLength} characters long"
+        );
+
+        public static Error NotFound => Error.NotFound(
+            code: "Exercise.NotFound",
+            description: "Exercise not found"
+        );
+    }
 }
