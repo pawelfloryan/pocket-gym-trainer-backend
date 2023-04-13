@@ -6,6 +6,7 @@ using ErrorOr;
 
 namespace PocketGymTrainer.Controllers;
 
+[Route("sections")]
 public class SectionController : ApiController
 {
     private readonly ISectionService _sectionService;

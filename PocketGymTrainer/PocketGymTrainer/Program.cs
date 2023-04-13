@@ -1,4 +1,5 @@
 using PocketGymTrainer.Services.Sections;
+using PocketGymTrainer.Services.Exercises;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISectionService, SectionService>();
+builder.Services.AddScoped<IExerciseService, ExerciseService>();
 
 var app = builder.Build();
 

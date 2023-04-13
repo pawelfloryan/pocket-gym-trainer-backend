@@ -1,8 +1,8 @@
 namespace PocketGymTrainer.Contracts.Exercise;
 
-public record CreateExerciseResponse(
+public record ExerciseResponse(
     Guid id,
-    int exerciseId,
+    int sectionId,
     string image,
     string name,
     List<string> description

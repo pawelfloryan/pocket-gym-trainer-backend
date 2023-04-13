@@ -8,27 +8,27 @@ public class Exercise
 {
     public const int MinNameLength = 3;
     public Guid Id { get; }
-    public int ExerciseId { get; }
+    public int SectionId { get; }
     public string Image { get; }
     public string Name { get; }
     public List<string> Description { get; }
 
     private Exercise(
         Guid id, 
-        int exerciseId, 
+        int sectionId, 
         string image, 
         string name, 
         List<string> description
         )
     {
         Id = id;
-        ExerciseId = exerciseId;
+        SectionId = sectionId;
         Image = image;
         Name = name;
         Description = description;
     }
 
-    public static ErrorOr<Exercise> Create(int exerciseId, string image, string name, List<string> description, Guid? id = null)
+    public static ErrorOr<Exercise> Create(int sectionId, string image, string name, List<string> description, Guid? id = null)
     {
         List<Error> errors = new();
 
@@ -42,26 +42,27 @@ public class Exercise
             return errors;
         }
 
-        return new Exercise(id ?? Guid.NewGuid(), exerciseId, image, name, description);
+        return new Exercise(id ?? Guid.NewGuid(), sectionId, image, name, description);
     }
     
     public static ErrorOr<Exercise> From(CreateExerciseRequest request)
     {
         return Create(
-            request.exerciseId,
+            request.sectionId,
             request.image,
             request.name,
             request.description
         );
     }
 
-    public static ErrorOr<Exercise> From(UpsertExerciseRequest request)
+    public static ErrorOr<Exercise> From(Guid id, UpsertExerciseRequest request)
     {
         return Create(
-            request.exerciseId,
+            request.sectionId,
             request.image,
             request.name,
-            request.description
+            request.description,
+            id
         );
     }
 }

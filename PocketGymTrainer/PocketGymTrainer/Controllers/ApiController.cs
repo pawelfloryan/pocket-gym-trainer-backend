@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace PocketGymTrainer.Controllers;
 
 [ApiController]
-[Route("sections")]
 public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
