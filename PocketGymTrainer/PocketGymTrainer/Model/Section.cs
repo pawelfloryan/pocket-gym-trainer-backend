@@ -1,6 +1,7 @@
 using ErrorOr;
 using PocketGymTrainer.Contracts.Section;
 using PocketGymTrainer.ServiceErrors;
+using System.ComponentModel.DataAnnotations;
 
 namespace PocketGymTrainer.Models;
 
@@ -8,9 +9,15 @@ public class Section
 {
     public const int MaxNameLength = 8;
     public const int MinNameLength = 3;
+    [Key]
     public Guid Id { get; }
-    public string Name {get; }
+    public string Name { get; }
 
+    private Section()
+    {
+
+    }
+    
     private Section(Guid id, string name)
     {
         Id = id;

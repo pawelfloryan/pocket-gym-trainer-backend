@@ -1,18 +1,25 @@
 using ErrorOr;
 using PocketGymTrainer.Contracts.Exercise;
 using PocketGymTrainer.ServiceErrors;
+using System.ComponentModel.DataAnnotations;
 
 namespace PocketGymTrainer.Models;
 
 public class Exercise
 {
     public const int MinNameLength = 3;
+    [Key]
     public Guid Id { get; }
     public int SectionId { get; }
     public string Image { get; }
     public string Name { get; }
     public List<string> Description { get; }
 
+    private Exercise()
+    {
+
+    }
+    
     private Exercise(
         Guid id, 
         int sectionId, 
