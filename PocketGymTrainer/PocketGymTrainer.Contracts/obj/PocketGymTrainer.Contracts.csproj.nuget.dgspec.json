@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {}
+    "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {}
   },
   "projects": {
-    "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
+    "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
+        "projectUniqueName": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
         "projectName": "PocketGymTrainer.Contracts",
-        "projectPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
-        "packagesPath": "/home/oreopl/.nuget/packages/",
-        "outputPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/",
+        "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
+        "packagesPath": "/home/pawel/.nuget/packages/",
+        "outputPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oreopl/.nuget/NuGet/NuGet.Config"
+          "/home/pawel/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.408/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.405/RuntimeIdentifierGraph.json"
         }
       }
     }
