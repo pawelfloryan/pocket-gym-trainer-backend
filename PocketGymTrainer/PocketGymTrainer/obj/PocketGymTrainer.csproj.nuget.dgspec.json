@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj": {}
+    "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj": {}
   },
   "projects": {
-    "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
+    "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
+        "projectUniqueName": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
         "projectName": "PocketGymTrainer.Contracts",
-        "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
-        "packagesPath": "/home/pawel/.nuget/packages/",
-        "outputPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/",
+        "projectPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
+        "packagesPath": "/home/oreopl/.nuget/packages/",
+        "outputPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pawel/.nuget/NuGet/NuGet.Config"
+          "/home/oreopl/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,21 +53,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.405/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.408/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj": {
+    "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
+        "projectUniqueName": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
         "projectName": "PocketGymTrainer",
-        "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
-        "packagesPath": "/home/pawel/.nuget/packages/",
-        "outputPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/obj/",
+        "projectPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
+        "packagesPath": "/home/oreopl/.nuget/packages/",
+        "outputPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pawel/.nuget/NuGet/NuGet.Config"
+          "/home/oreopl/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -79,8 +79,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
-                "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj"
+              "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
+                "projectPath": "/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj"
               }
             }
           }
@@ -133,7 +133,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.405/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.408/RuntimeIdentifierGraph.json"
         }
       }
     }

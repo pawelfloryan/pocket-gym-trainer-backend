@@ -10,7 +10,7 @@ public class Section
     public const int MaxNameLength = 8;
     public const int MinNameLength = 3;
     [Key]
-    public Guid Id { get; }
+    public Guid Id { get; set; }
     public string Name { get; }
 
     private Section()

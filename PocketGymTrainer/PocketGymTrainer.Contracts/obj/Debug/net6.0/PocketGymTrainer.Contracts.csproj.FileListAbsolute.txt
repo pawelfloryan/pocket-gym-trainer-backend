@@ -10,3 +10,15 @@
 /home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/refint/PocketGymTrainer.Contracts.dll
 /home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.pdb
 /home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/ref/PocketGymTrainer.Contracts.dll
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/bin/Debug/net6.0/PocketGymTrainer.Contracts.deps.json
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/bin/Debug/net6.0/PocketGymTrainer.Contracts.dll
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/bin/Debug/net6.0/PocketGymTrainer.Contracts.pdb
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.csproj.AssemblyReference.cache
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.AssemblyInfoInputs.cache
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.AssemblyInfo.cs
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.csproj.CoreCompileInputs.cache
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.dll
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/refint/PocketGymTrainer.Contracts.dll
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/PocketGymTrainer.Contracts.pdb
+/home/oreopl/Pulpit/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/obj/Debug/net6.0/ref/PocketGymTrainer.Contracts.dll

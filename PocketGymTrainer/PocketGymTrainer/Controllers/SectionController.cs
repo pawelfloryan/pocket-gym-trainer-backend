@@ -3,6 +3,8 @@ using PocketGymTrainer.Models;
 using PocketGymTrainer.Contracts.Section;
 using PocketGymTrainer.Services.Sections;
 using ErrorOr;
+using PocketGymTrainer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PocketGymTrainer.Controllers;
 
@@ -10,14 +12,22 @@ namespace PocketGymTrainer.Controllers;
 public class SectionController : ApiController
 {
     private readonly ISectionService _sectionService;
+    private readonly ILogger<SectionController> _logger;
+    private readonly ApiDbContext _context;
 
-    public SectionController(ISectionService sectionService)
+    public SectionController(
+        ISectionService sectionService, 
+        ILogger<SectionController> logger, 
+        ApiDbContext context
+        )
     {
         _sectionService = sectionService;
+        _logger = logger;
+        _context = context;
     }
     
     [HttpPost]
-    public IActionResult CreateSection(CreateSectionRequest request)
+    public async Task<IActionResult> CreateSection(CreateSectionRequest request)
     {
         ErrorOr<Section> requestToSectionResult = Section.From(request);
 
@@ -28,6 +38,11 @@ public class SectionController : ApiController
 
         var section = requestToSectionResult.Value;
         ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
+
+        _context.Add(section);
+        await _context.SaveChangesAsync();
+
+        var allSections = await _context.Section.ToListAsync();
 
         return requestToSectionResult.Match(
             created => CreatedAtGetSection(section),
