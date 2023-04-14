@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "23XLceLEi5tivNed8CclmuYz1UTASUsfrrKSoXFjMLLduZBmX4dbKluQHCsAZz5pdBeqRJDqsZUXy1+0kZkdVQ==",
+  "dgSpecHash": "pdX/T8PprqpPGtxhlppgPaxjl/vwaUb/I9sO5aAHCij15QHQdEFUN8E2QzyV/7u7Uep8BpaHL9r+PcyWBKvWkQ==",
   "success": true,
-  "projectFilePath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
+  "projectFilePath": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

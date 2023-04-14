@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NF5UEwo+bUb+kaXgyb/sqLtI9sCZK5mAdvlPj4PDuIecpeIez8i+cZ/Qr21P+2ssj7YMd6f9ermCEDlr++1gzw==",
+  "dgSpecHash": "ejK763gWHJcqZPzBTRs3xJk7yOoVwg55cy+FEbQrMuREruoWwjgIPqw+Epaj01e6bFTuZLIj6KNFgYngbBOVWg==",
   "success": true,
-  "projectFilePath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
+  "projectFilePath": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
   "expectedPackageFiles": [
     "/home/pawel/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/home/pawel/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",

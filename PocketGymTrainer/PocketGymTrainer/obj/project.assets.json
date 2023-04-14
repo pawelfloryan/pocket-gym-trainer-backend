@@ -1339,11 +1339,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
+      "projectUniqueName": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
       "projectName": "PocketGymTrainer",
-      "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
+      "projectPath": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/PocketGymTrainer.csproj",
       "packagesPath": "/home/pawel/.nuget/packages/",
-      "outputPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/obj/",
+      "outputPath": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/pawel/.nuget/NuGet/NuGet.Config"
@@ -1358,8 +1358,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
-              "projectPath": "/home/pawel/Desktop/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj"
+            "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj": {
+              "projectPath": "/home/pawel/Projekty/PocketGymTrainerBackend/PocketGymTrainer/PocketGymTrainer.Contracts/PocketGymTrainer.Contracts.csproj"
             }
           }
         }

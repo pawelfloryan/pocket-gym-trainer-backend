@@ -5,10 +5,10 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-COPY *.csproj ./
+COPY PocketGymTrainer/PocketGymTrainer.csproj .
 RUN dotnet restore
 
-COPY . ./
+COPY . .
 RUN dotnet publish -c Release -o publish
 
 FROM base AS final
