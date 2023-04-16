@@ -10,10 +10,10 @@ public class Exercise
     public const int MinNameLength = 3;
     [Key]
     public Guid Id { get; set; }
-    public int SectionId { get; }
-    public string Image { get; }
-    public string Name { get; }
-    public List<string> Description { get; }
+    public int SectionId { get; set; }
+    public string Image { get; set; }
+    public string Name { get; set; }
+    public List<string> Description { get; set; }
 
     private Exercise()
     {

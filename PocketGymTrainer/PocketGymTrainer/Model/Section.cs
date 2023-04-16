@@ -11,7 +11,7 @@ public class Section
     public const int MinNameLength = 3;
     [Key]
     public Guid Id { get; set; }
-    public string Name { get; }
+    public string Name { get; set; }
 
     private Section()
     {
@@ -41,6 +41,13 @@ public class Section
         return new Section(id ?? Guid.NewGuid(), name);
     }
 
+    public static Section CreateS(string name, Guid? id = null)
+    {
+        List<Error> errors = new();
+
+        return new Section(id ?? Guid.NewGuid(), name);
+    }
+
     public static ErrorOr<Section> From(CreateSectionRequest request)
     {
         return Create(
@@ -51,6 +58,14 @@ public class Section
     public static ErrorOr<Section> From(Guid id, UpsertSectionRequest request)
     {
         return Create(
+            request.name,
+            id
+        );
+    }
+
+    public static Section FromRes(Guid id, SectionResponse request)
+    {
+        return CreateS(
             request.name,
             id
         );

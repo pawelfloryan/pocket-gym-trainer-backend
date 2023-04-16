@@ -1,0 +1,40 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  pocket-gym-trainer:
+    image: docker.io/library/pocketgymtrainer
+    depends_on:
+      - "pocketgymtrainer_db"
+    container_name: pocketgymtrainer-services
+    ports:
+      - "8088:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=pocketgymtrainer_db;Port=5432;Database=PocketGymTrainerDB; IntegratedSecurity=true;Pooling=true;
+      - ASPNETCORE_URLS=http://+80
+    networks:
+      - dev
+  
+  pocketgymtrainer_db:
+    image: postgres:latest
+    container_name: pocketgymtrainer_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=PocketGymTrainerDB
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - pocketgymtrainer_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  pocketgymtrainer_data:
