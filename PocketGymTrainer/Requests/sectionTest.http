@@ -1,0 +1,6 @@
+POST http://localhost:8088/sections
+Content-Type: application/json
+
+{
+    "name": "CHEST"
+}

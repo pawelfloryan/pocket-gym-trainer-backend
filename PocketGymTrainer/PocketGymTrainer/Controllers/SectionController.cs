@@ -27,7 +27,7 @@ public class SectionController : ApiController
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateSection(CreateSectionRequest request)
+    public IActionResult CreateSection(CreateSectionRequest request)
     {
         ErrorOr<Section> requestToSectionResult = Section.From(request);
 
@@ -38,11 +38,6 @@ public class SectionController : ApiController
 
         var section = requestToSectionResult.Value;
         ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
-
-        _context.Add(section);
-        await _context.SaveChangesAsync();
-
-        var allSections = await _context.Section.ToListAsync();
 
         return requestToSectionResult.Match(
             created => CreatedAtGetSection(section),
@@ -91,16 +86,20 @@ public class SectionController : ApiController
         );
     }
 
-    private SectionResponse MapSectionResponseAsync(Section section)
+    private async Task<List<SectionResponse>> MapSectionResponseAsync(Section section)
     {
         var sectionResponse = new SectionResponse(
             section.Id,
             section.Name
         );
-        Section sectionConvert = Section.FromRes(sectionResponse.Id, sectionResponse);
-        _context.Add(sectionConvert);
 
-        return(sectionResponse);
+        _context.Add(sectionResponse);
+        await _context.SaveChangesAsync();
+
+        var allSections = await _context.SectionResponse.ToListAsync();
+        List<SectionResponse> list = await _context.SectionResponse.ToListAsync();
+
+        return(list);
     }
 
     private CreatedAtActionResult CreatedAtGetSection(Section section)
@@ -110,6 +109,14 @@ public class SectionController : ApiController
             routeValues: new { id = section.Id },
             value: MapSectionResponseAsync(section)
         );
+    }
+
+    public async Task<IActionResult> ContextAdd(Section section){
+        _context.Add(section);
+        await _context.SaveChangesAsync();
+
+        var allSections = await _context.Section.ToListAsync();
+        return Ok(allSections);
     }
 
     //public async Task<SectionResponse> ContextAdd(SectionResponse section)
