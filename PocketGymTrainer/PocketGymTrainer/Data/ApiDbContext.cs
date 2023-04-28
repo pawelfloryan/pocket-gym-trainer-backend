@@ -13,7 +13,6 @@ public class ApiDbContext : DbContext
     }
 
     public DbSet<Section> Section {get; set;}
-    public SectionResponse SectionResponse {get; set;}
 
     public DbSet<Exercise> Exercise {get; set;}
 

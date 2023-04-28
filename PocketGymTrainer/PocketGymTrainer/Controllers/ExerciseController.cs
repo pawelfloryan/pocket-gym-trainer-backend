@@ -3,6 +3,7 @@ using PocketGymTrainer.Models;
 using PocketGymTrainer.Contracts.Exercise;
 using PocketGymTrainer.Services.Exercises;
 using ErrorOr;
+using PocketGymTrainer.Data;
 
 namespace PocketGymTrainer.Controllers;
 
@@ -10,14 +11,18 @@ namespace PocketGymTrainer.Controllers;
 public class ExerciseController : ApiController
 {
     private readonly IExerciseService _exerciseService;
+    private readonly ApiDbContext _context;
 
-    public ExerciseController(IExerciseService exerciseService)
+    public ExerciseController(IExerciseService exerciseService,
+        ApiDbContext context
+        )
     {
         _exerciseService = exerciseService;
+        _context = context;
     }
     
     [HttpPost]
-    public IActionResult CreateExercise(CreateExerciseRequest request)
+    public async Task<IActionResult> CreateExerciseAsync(CreateExerciseRequest request)
     {
         ErrorOr<Exercise> requestToExerciseResult = Exercise.From(request);
 
@@ -25,6 +30,9 @@ public class ExerciseController : ApiController
         {
             return Problem(requestToExerciseResult.Errors);
         }
+
+        _context.Add(request);
+        await _context.SaveChangesAsync();
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<Created> createdExerciseResult = _exerciseService.CreateExercise(exercise);
@@ -85,7 +93,6 @@ public class ExerciseController : ApiController
             exercise.Name,
             exercise.Description
         );
-
     }
 
     private CreatedAtActionResult CreatedAtGetExercise(Exercise exercise)
