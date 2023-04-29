@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PocketGymTrainer.Models;
-using PocketGymTrainer.Contracts.Exercise;
+using PocketGymTrainer.ExerciseRequests;
 using PocketGymTrainer.Services.Exercises;
 using ErrorOr;
 using PocketGymTrainer.Data;
@@ -31,11 +31,12 @@ public class ExerciseController : ApiController
             return Problem(requestToExerciseResult.Errors);
         }
 
-        _context.Add(request);
-        await _context.SaveChangesAsync();
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<Created> createdExerciseResult = _exerciseService.CreateExercise(exercise);
+
+        _context.Add(exercise);
+        await _context.SaveChangesAsync();
 
         return requestToExerciseResult.Match(
             created => CreatedAtGetExercise(exercise),

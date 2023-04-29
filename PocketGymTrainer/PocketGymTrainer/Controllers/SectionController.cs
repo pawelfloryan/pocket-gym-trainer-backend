@@ -36,12 +36,14 @@ public class SectionController : ApiController
             return Problem(requestToSectionResult.Errors);
         }
 
-       
 
         //var allSections = await _context.SectionResponse.ToListAsync();
 
         var section = requestToSectionResult.Value;
         ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
+        
+        _context.Add(section);
+        await _context.SaveChangesAsync();
 
         return requestToSectionResult.Match(
             created => CreatedAtGetSection(section),
