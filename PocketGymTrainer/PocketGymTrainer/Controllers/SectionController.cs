@@ -36,9 +36,6 @@ public class SectionController : ApiController
             return Problem(requestToSectionResult.Errors);
         }
 
-
-        //var allSections = await _context.SectionResponse.ToListAsync();
-
         var section = requestToSectionResult.Value;
         ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
         
@@ -51,13 +48,14 @@ public class SectionController : ApiController
         );
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetSection(Guid id)
+    [HttpGet]
+    public async Task<IActionResult> GetSectionAsync(Guid id)
     {
-        ErrorOr<Section> getSectionResult = _sectionService.GetSection(id);
+        ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection(id);
+        var allSections = await _context.Section.ToListAsync();
 
         return getSectionResult.Match(
-            section => Ok(MapSectionResponseAsync(section)),
+            allSections => Ok(MapSectionListResponseAsync(allSections)),
             errors => Problem(errors)
         );
     }
@@ -100,10 +98,24 @@ public class SectionController : ApiController
         );
     }
 
+    private static List<SectionResponse> MapSectionListResponseAsync(List<Section> sectionList)
+    {
+        List<SectionResponse> responseList = new();
+        foreach(var section in sectionList)
+        {
+            SectionResponse response = new SectionResponse(
+                section.Id,
+                section.Name
+            );
+            responseList.Add(response);
+        }
+        return responseList;
+    }
+
     private CreatedAtActionResult CreatedAtGetSection(Section section)
     {
         return CreatedAtAction(
-            actionName: nameof(GetSection),
+            actionName: nameof(GetSectionAsync),
             routeValues: new { id = section.Id },
             value: MapSectionResponseAsync(section)
         );
