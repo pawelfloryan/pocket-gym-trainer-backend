@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PocketGymTrainer.Models;
-using PocketGymTrainer.ExerciseRequests;
+using PocketGymTrainer.Contracts.Exercise;
 using PocketGymTrainer.Services.Exercises;
 using ErrorOr;
 using PocketGymTrainer.Data;

@@ -1,5 +1,5 @@
 using ErrorOr;
-using PocketGymTrainer.ExerciseRequests;
+using PocketGymTrainer.Contracts.Exercise;
 using PocketGymTrainer.ServiceErrors;
 using System.ComponentModel.DataAnnotations;
 
