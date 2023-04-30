@@ -48,10 +48,10 @@ public class SectionController : ApiController
         );
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetSectionAsync(Guid id)
+    [HttpGet("list")]
+    public async Task<IActionResult> GetSectionAsync()
     {
-        ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection(id);
+        ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection();
         var allSections = await _context.Section.ToListAsync();
 
         return getSectionResult.Match(
@@ -101,7 +101,7 @@ public class SectionController : ApiController
     private static List<SectionResponse> MapSectionListResponseAsync(List<Section> sectionList)
     {
         List<SectionResponse> responseList = new();
-        foreach(var section in sectionList)
+        foreach(Section section in sectionList)
         {
             SectionResponse response = new SectionResponse(
                 section.Id,

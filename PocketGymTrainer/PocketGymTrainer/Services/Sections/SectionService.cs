@@ -14,18 +14,11 @@ public class SectionService : ISectionService
         return Result.Created;
     }
 
-    public ErrorOr<List<Section>> GetSection(Guid id)
+    public ErrorOr<List<Section>> GetSection()
     {
-        List<Section> sectionList = new();
-        if(_sections.Any())
+        List<Section> sectionList = _sections.Values.ToList();
+        if(_sections.Count > 0)
         {
-            foreach(KeyValuePair<Guid, Section> element in _sections)
-            {
-                if(_sections.TryGetValue(id, out var section))
-                {
-                    sectionList.Add(section);
-                }
-            }
             return sectionList;
         }
         return Errors.Section.NotFound;
