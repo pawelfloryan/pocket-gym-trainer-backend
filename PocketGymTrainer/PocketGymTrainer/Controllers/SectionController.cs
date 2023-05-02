@@ -41,6 +41,8 @@ public class SectionController : ApiController
         
         _context.Add(section);
         await _context.SaveChangesAsync();
+        
+        _sectionService.removeData();
 
         return requestToSectionResult.Match(
             created => CreatedAtGetSection(section),
@@ -49,10 +51,12 @@ public class SectionController : ApiController
     }
 
     [HttpGet("list")]
-    public async Task<IActionResult> GetSectionAsync()
+    public async Task<IActionResult> GetSection()
     {
         ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection();
         var allSections = await _context.Section.ToListAsync();
+
+        _sectionService.removeData();
 
         return getSectionResult.Match(
             allSections => Ok(MapSectionListResponseAsync(allSections)),
@@ -90,7 +94,7 @@ public class SectionController : ApiController
         );
     }
 
-    private static SectionResponse MapSectionResponseAsync(Section section)
+    private static SectionResponse MapSectionResponse(Section section)
     {
         return new SectionResponse(
             section.Id,
@@ -115,9 +119,9 @@ public class SectionController : ApiController
     private CreatedAtActionResult CreatedAtGetSection(Section section)
     {
         return CreatedAtAction(
-            actionName: nameof(GetSectionAsync),
+            actionName: nameof(GetSection),
             routeValues: new { id = section.Id },
-            value: MapSectionResponseAsync(section)
+            value: MapSectionResponse(section)
         );
     }
 
