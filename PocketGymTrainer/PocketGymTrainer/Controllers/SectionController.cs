@@ -124,15 +124,4 @@ public class SectionController : ApiController
             value: MapSectionResponse(section)
         );
     }
-
-    //public async Task<SectionResponse> ContextAdd(SectionResponse section)
-    //{
-    //    //ErrorOr<Section> sectionValue = Section.From(request);
-    //    //var section = sectionValue.Value;
-    //    _context.Add(section);
-    //    await _context.SaveChangesAsync();
-//
-    //    var allSections = await _context.Section.ToListAsync();
-    //    return section;
-    //}
 }
