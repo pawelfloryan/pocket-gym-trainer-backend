@@ -34,10 +34,9 @@ public class SectionService : ISectionService
         return _sections;
     }
 
-    public Dictionary<Guid, Section> removeData()
+    public void removeData()
     {
         _sections.Clear();
-        return _sections;
     }
 
     public ErrorOr<List<Section>> GetSection()
