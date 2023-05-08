@@ -50,7 +50,7 @@ public class SectionController : ApiController
         );
     }
 
-    [HttpGet("list")]
+    [HttpGet]
     public async Task<IActionResult> GetSection()
     {
         ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection();

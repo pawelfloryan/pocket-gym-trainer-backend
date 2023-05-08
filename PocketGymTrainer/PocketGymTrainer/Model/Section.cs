@@ -62,12 +62,4 @@ public class Section
             id
         );
     }
-
-    public static Section FromRes(Guid id, SectionResponse request)
-    {
-        return CreateS(
-            request.name,
-            id
-        );
-    }
 }

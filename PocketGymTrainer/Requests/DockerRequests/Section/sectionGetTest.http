@@ -1,1 +1,1 @@
-GET http://localhost:8088/sections/list
+GET http://localhost:8088/sections
