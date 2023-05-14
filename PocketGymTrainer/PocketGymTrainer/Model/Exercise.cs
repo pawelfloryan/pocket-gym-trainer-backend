@@ -7,7 +7,6 @@ namespace PocketGymTrainer.Models;
 
 public class Exercise
 {
-    public const int MinNameLength = 3;
     [Key]
     public Guid Id { get; set; }
     public int SectionId { get; set; }
@@ -37,18 +36,6 @@ public class Exercise
 
     public static ErrorOr<Exercise> Create(int sectionId, string image, string name, List<string> description, Guid? id = null)
     {
-        List<Error> errors = new();
-
-        if(name.Length is < MinNameLength)
-        {
-            errors.Add(Errors.Exercise.InvalidName);
-        }
-
-        if(errors.Count > 0)
-        {
-            return errors;
-        }
-
         return new Exercise(id ?? Guid.NewGuid(), sectionId, image, name, description);
     }
     

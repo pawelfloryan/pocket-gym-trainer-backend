@@ -7,8 +7,6 @@ namespace PocketGymTrainer.Models;
 
 public class Section
 {
-    public const int MaxNameLength = 8;
-    public const int MinNameLength = 3;
     [Key]
     public Guid Id { get; set; }
     public string Name { get; set; }
@@ -26,18 +24,6 @@ public class Section
 
     public static ErrorOr<Section> Create(string name, Guid? id = null)
     {
-        List<Error> errors = new();
-
-        if(name.Length is < MinNameLength or > MaxNameLength)
-        {
-            errors.Add(Errors.Section.InvalidName);
-        }
-
-        if(errors.Count > 0)
-        {
-            return errors;
-        }
-
         return new Section(id ?? Guid.NewGuid(), name);
     }
 
