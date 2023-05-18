@@ -17,6 +17,7 @@ public class SectionService : ISectionService
     
     private static readonly Dictionary<Guid, Section> _sections = new();
     private static readonly Dictionary<Guid, Section> _sectionsCreated = new();
+
     public ErrorOr<Created> CreateSection(Section section)
     {
         _sectionsCreated.Add(section.Id, section);
@@ -61,8 +62,10 @@ public class SectionService : ISectionService
 
     public ErrorOr<Deleted> DeleteSection(Guid id)
     {
-        //addGetData();
+        addGetData();
+        var section = _sections[id];
         _sections.Remove(id);
+        _context.Remove(section);
 
         return Result.Deleted;
     }

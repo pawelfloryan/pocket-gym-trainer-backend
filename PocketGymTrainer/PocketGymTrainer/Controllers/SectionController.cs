@@ -84,9 +84,15 @@ public class SectionController : ApiController
     }
 
     [HttpDelete("{id:guid}")]
-    public IActionResult DeleteSection(Guid id)
+    public async Task<IActionResult> DeleteSection(Guid id)
     {
         ErrorOr<Deleted> deleteSectionResult = _sectionService.DeleteSection(id);
+        //var section = deleteSectionResult.Value;
+//
+        //_context.Remove(id);
+        await _context.SaveChangesAsync();
+        
+        _sectionService.removeData();
 
         return deleteSectionResult.Match(
             deleted => NoContent(),
