@@ -27,7 +27,7 @@ public class SectionController : ApiController
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateSectionAsync(CreateSectionRequest request)
+    public async Task<IActionResult> CreateSection(CreateSectionRequest request)
     {
         ErrorOr<Section> requestToSectionResult = Section.From(request);
 
@@ -87,9 +87,6 @@ public class SectionController : ApiController
     public async Task<IActionResult> DeleteSection(Guid id)
     {
         ErrorOr<Deleted> deleteSectionResult = _sectionService.DeleteSection(id);
-        //var section = deleteSectionResult.Value;
-//
-        //_context.Remove(id);
         await _context.SaveChangesAsync();
         
         _sectionService.removeData();

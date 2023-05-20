@@ -6,7 +6,8 @@ namespace PocketGymTrainer.Services.Exercises;
 public interface IExerciseService
 {
     ErrorOr<Created> CreateExercise(Exercise exercise);
-    ErrorOr<Exercise> GetExercise(Guid id);
+    ErrorOr<List<Exercise>> GetExercise();
     ErrorOr<UpsertedExercise> UpsertExercise(Exercise exercise);
     ErrorOr<Deleted> DeleteExercise(Guid id);
+    void removeData();
 }

@@ -4,6 +4,7 @@ using PocketGymTrainer.Contracts.Exercise;
 using PocketGymTrainer.Services.Exercises;
 using ErrorOr;
 using PocketGymTrainer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PocketGymTrainer.Controllers;
 
@@ -22,7 +23,7 @@ public class ExerciseController : ApiController
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateExerciseAsync(CreateExerciseRequest request)
+    public async Task<IActionResult> CreateExercise(CreateExerciseRequest request)
     {
         ErrorOr<Exercise> requestToExerciseResult = Exercise.From(request);
 
@@ -38,19 +39,24 @@ public class ExerciseController : ApiController
         _context.Add(exercise);
         await _context.SaveChangesAsync();
 
+        _exerciseService.removeData();
+
         return requestToExerciseResult.Match(
             created => CreatedAtGetExercise(exercise),
             errors => Problem(errors)
         );
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetExercise(Guid id)
+    [HttpGet]
+    public async Task<IActionResult> GetExercise()
     {
-        ErrorOr<Exercise> getExerciseResult = _exerciseService.GetExercise(id);
+        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise();
+        var allExercises = await _context.Exercise.ToListAsync();
+
+        _exerciseService.removeData();
 
         return getExerciseResult.Match(
-            exercise => Ok(MapExerciseResponse(exercise)),
+            exercise => Ok(MapExerciseListResponseAsync(allExercises)),
             errors => Problem(errors)
         );
     }
@@ -75,10 +81,13 @@ public class ExerciseController : ApiController
     }
 
     [HttpDelete("{id:guid}")]
-    public IActionResult DeleteExercise(Guid id)
+    public async Task<IActionResult> DeleteExercise(Guid id)
     {
         ErrorOr<Deleted> deleteExerciseResult = _exerciseService.DeleteExercise(id);
-
+        await _context.SaveChangesAsync();
+        
+        _exerciseService.removeData();
+        
         return deleteExerciseResult.Match(
             deleted => NoContent(),
             errors => Problem(errors)
@@ -94,6 +103,23 @@ public class ExerciseController : ApiController
             exercise.Name,
             exercise.Description
         );
+    }
+
+    private static List<ExerciseResponse> MapExerciseListResponseAsync(List<Exercise> exerciseList)
+    {
+        List<ExerciseResponse> responseList = new();
+        foreach(Exercise exercise in exerciseList)
+        {
+            ExerciseResponse response = new ExerciseResponse(
+                exercise.Id,
+                exercise.SectionId,
+                exercise.Image,
+                exercise.Name,
+                exercise.Description
+            );
+            responseList.Add(response);
+        }
+        return responseList;
     }
 
     private CreatedAtActionResult CreatedAtGetExercise(Exercise exercise)

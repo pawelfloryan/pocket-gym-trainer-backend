@@ -1,0 +1,3 @@
+@id = 71f7d5cf-2ffd-46d1-b9d1-a027834b7d8d
+
+DELETE http://localhost:8088/exercises/{{id}}
