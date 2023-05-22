@@ -9,7 +9,7 @@ public class Exercise
 {
     [Key]
     public Guid Id { get; set; }
-    public int SectionId { get; set; }
+    public string SectionId { get; set; }
     public string Image { get; set; }
     public string Name { get; set; }
     public List<string> Description { get; set; }
@@ -21,7 +21,7 @@ public class Exercise
     
     private Exercise(
         Guid id, 
-        int sectionId, 
+        string sectionId, 
         string image, 
         string name, 
         List<string> description
@@ -34,7 +34,7 @@ public class Exercise
         Description = description;
     }
 
-    public static ErrorOr<Exercise> Create(int sectionId, string image, string name, List<string> description, Guid? id = null)
+    public static ErrorOr<Exercise> Create(string sectionId, string image, string name, List<string> description, Guid? id = null)
     {
         return new Exercise(id ?? Guid.NewGuid(), sectionId, image, name, description);
     }

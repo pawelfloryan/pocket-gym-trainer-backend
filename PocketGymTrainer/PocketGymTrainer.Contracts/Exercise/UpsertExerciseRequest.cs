@@ -1,7 +1,7 @@
 namespace PocketGymTrainer.Contracts.Exercise;
 
 public record UpsertExerciseRequest(
-    int sectionId,
+    string sectionId,
     string image,
     string name,
     List<string> description
