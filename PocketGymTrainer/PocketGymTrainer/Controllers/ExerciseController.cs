@@ -99,9 +99,7 @@ public class ExerciseController : ApiController
         return new ExerciseResponse(
             exercise.Id,
             exercise.SectionId,
-            exercise.Image,
-            exercise.Name,
-            exercise.Description
+            exercise.Name
         );
     }
 
@@ -113,9 +111,7 @@ public class ExerciseController : ApiController
             ExerciseResponse response = new ExerciseResponse(
                 exercise.Id,
                 exercise.SectionId,
-                exercise.Image,
-                exercise.Name,
-                exercise.Description
+                exercise.Name
             );
             responseList.Add(response);
         }

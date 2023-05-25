@@ -10,9 +10,7 @@ public class Exercise
     [Key]
     public Guid Id { get; set; }
     public string SectionId { get; set; }
-    public string Image { get; set; }
     public string Name { get; set; }
-    public List<string> Description { get; set; }
 
     private Exercise()
     {
@@ -22,30 +20,24 @@ public class Exercise
     private Exercise(
         Guid id, 
         string sectionId, 
-        string image, 
-        string name, 
-        List<string> description
+        string name
         )
     {
         Id = id;
         SectionId = sectionId;
-        Image = image;
         Name = name;
-        Description = description;
     }
 
-    public static ErrorOr<Exercise> Create(string sectionId, string image, string name, List<string> description, Guid? id = null)
+    public static ErrorOr<Exercise> Create(string sectionId, string name, Guid? id = null)
     {
-        return new Exercise(id ?? Guid.NewGuid(), sectionId, image, name, description);
+        return new Exercise(id ?? Guid.NewGuid(), sectionId, name);
     }
     
     public static ErrorOr<Exercise> From(CreateExerciseRequest request)
     {
         return Create(
             request.sectionId,
-            request.image,
-            request.name,
-            request.description
+            request.name
         );
     }
 
@@ -53,9 +45,7 @@ public class Exercise
     {
         return Create(
             request.sectionId,
-            request.image,
             request.name,
-            request.description,
             id
         );
     }
