@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PocketGymTrainer.Contracts.Section;
 using PocketGymTrainer.Models;
 
 namespace PocketGymTrainer.Data;
 
-public class ApiDbContext : DbContext
+public class ApiDbContext : IdentityDbContext
 {
     public ApiDbContext(DbContextOptions<ApiDbContext> options)
         : base(options)

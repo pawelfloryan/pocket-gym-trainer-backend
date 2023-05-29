@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PocketGymTrainer.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,17 @@ builder.Services.AddAuthentication(options =>
 })
     .AddJwtBearer(jwt => {
         var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+
+        jwt.SaveToken = true;
+        jwt.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false, // for dev
+            ValidateAudience = false, // for dev
+            RequireExpirationTime = false, // for dev -- needs to updated when refresh token is added
+            ValidateLifetime = true
+        };
     });
 
 builder.Services.AddControllers();
@@ -39,12 +51,17 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
     app.UseExceptionHandler("/error");
 }
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
