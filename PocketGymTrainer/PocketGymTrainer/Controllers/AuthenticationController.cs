@@ -14,18 +14,22 @@ namespace PocketGymTrainer.Controllers;
 public class AuthenticationController : ApiController
 {
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly JwtConfig _jwtConfig;
+    //private readonly JwtConfig _jwtConfig;
+    private readonly IConfiguration _configuration;
 
     public AuthenticationController(
         UserManager<IdentityUser> userManager,
-        JwtConfig jwtConfig)
+        //JwtConfig jwtConfig,
+        IConfiguration configuration
+        )
     {
         _userManager = userManager;
-        _jwtConfig = jwtConfig;
+        //_jwtConfig = jwtConfig;
+        _configuration = configuration;
     }
 
     [HttpPost]
-    [Route("/register")]
+    [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserRegistrationRequestDtos requestDto)
     {
         if(ModelState.IsValid)
@@ -47,7 +51,7 @@ public class AuthenticationController : ApiController
             var new_user = new IdentityUser()
             {
                 Email = requestDto.Email,
-                UserName = requestDto.Name
+                UserName = requestDto.Email
             };
 
             var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -66,7 +70,8 @@ public class AuthenticationController : ApiController
 
             return BadRequest(new AuthResult()
                 {
-                    Errors = new List<string>(){
+                    Errors = new List<string>()
+                    {
                         "Server Error"
                     },
                     Result = false
@@ -81,14 +86,14 @@ public class AuthenticationController : ApiController
     {
         var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-        var key = Encoding.UTF8.GetBytes(_jwtConfig.Secret);
+        var key = Encoding.UTF8.GetBytes(_configuration.GetSection("JwtConfig:Secret").Value);
 
         var tokenDescriptor = new SecurityTokenDescriptor()
         {
             Subject = new ClaimsIdentity(new []
                 {
                     new Claim("id", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Name, user.Email),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
