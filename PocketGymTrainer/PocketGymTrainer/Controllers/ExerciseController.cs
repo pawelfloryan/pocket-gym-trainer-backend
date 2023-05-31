@@ -5,9 +5,13 @@ using PocketGymTrainer.Services.Exercises;
 using ErrorOr;
 using PocketGymTrainer.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PocketGymTrainer.Controllers;
 
+[ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("exercises")]
 public class ExerciseController : ApiController
 {

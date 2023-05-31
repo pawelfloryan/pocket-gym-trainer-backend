@@ -1,0 +1,7 @@
+POST https://localhost:7102/auth/login
+Content-Type: application/json
+
+{
+    "email": "pawel@interia.pl",
+    "password": "Maslo123###"
+}

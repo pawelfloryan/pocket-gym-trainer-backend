@@ -5,9 +5,13 @@ using PocketGymTrainer.Services.Sections;
 using ErrorOr;
 using PocketGymTrainer.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace PocketGymTrainer.Controllers;
 
+[ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("sections")]
 public class SectionController : ApiController
 {

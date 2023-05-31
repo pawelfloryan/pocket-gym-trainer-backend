@@ -82,6 +82,63 @@ public class AuthenticationController : ApiController
         return BadRequest();
     }
 
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequestDtos requestDto)
+    {
+        if(ModelState.IsValid)
+        {
+            var existing_user = await _userManager.FindByEmailAsync(requestDto.Email);
+
+            if(existing_user == null)
+            {
+                return BadRequest(new AuthResult()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "Invalid payload"
+                        },
+                        Result = false
+                    }
+                );
+            }
+
+            var isCorrect = await _userManager.CheckPasswordAsync(existing_user, requestDto.Password);
+        
+            if(!isCorrect)
+            {
+                return BadRequest(new AuthResult()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "Invalid credentials"
+                        },
+                        Result = false
+                    }
+                );
+            }
+
+            var jwtToken = GenerateJwtToken(existing_user);
+
+            return Ok(new AuthResult()
+                {
+                    Token = jwtToken,
+                    Result = true
+                }
+            );
+        }
+
+        return BadRequest(new AuthResult()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                },
+                Result = false
+            }
+        );
+    }
+
     private string GenerateJwtToken(IdentityUser user)
     {
         var jwtTokenHandler = new JwtSecurityTokenHandler();
