@@ -1,8 +1,8 @@
-POST https://localhost:7102/auth/register
+POST http://localhost:8088/auth/register
 Content-Type: application/json
 
 {
-  "name": "JohnDoes",
-  "email": "johns@gmail.com",
-  "password": "Password123####"
+  "name": "Linus",
+  "email": "linus@torwalds.pl",
+  "password": "HasloMaslo123#"
 }
