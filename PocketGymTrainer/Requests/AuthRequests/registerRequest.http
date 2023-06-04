@@ -2,7 +2,7 @@ POST http://localhost:8088/auth/register
 Content-Type: application/json
 
 {
-  "name": "Linus",
-  "email": "linus@torwalds.pl",
+  "name": "Richard",
+  "email": "richard2@stallman.pl",
   "password": "HasloMaslo123#"
 }

@@ -17,4 +17,5 @@ public class ApiDbContext : IdentityDbContext
 
     public DbSet<Exercise> Exercise {get; set;}
 
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 }

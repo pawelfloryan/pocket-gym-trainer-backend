@@ -21,26 +21,23 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
+var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+
+var tokenValidationParameter =  new TokenValidationParameters();
+
 builder.Services.AddAuthentication(options => 
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-    .AddJwtBearer(jwt => {
-        var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
-
+    .AddJwtBearer(jwt => 
+    {
         jwt.SaveToken = true;
-        jwt.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false, // for dev
-            ValidateAudience = false, // for dev
-            RequireExpirationTime = false, // for dev -- needs to updated when refresh token is added
-            ValidateLifetime = true
-        };
+        jwt.TokenValidationParameters = tokenValidationParameter;
     });
+
+builder.Services.AddSingleton(tokenValidationParameter);
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApiDbContext>();
