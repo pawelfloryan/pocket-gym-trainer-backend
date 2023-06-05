@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using PocketGymTrainer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PocketGymTrainer.Controllers;
 
@@ -226,11 +227,11 @@ public class AuthenticationController : ApiController
 
             var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParameters, out var validatedToken);
 
-            if(validatedToken is JwtSecurityToken jwtSecurityToken)
+            if (validatedToken is JwtSecurityToken jwtSecurityToken)
             {
                 var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
 
-                if(result == false)
+                if (result == false)
                     return null;
             }
 
@@ -238,10 +239,89 @@ public class AuthenticationController : ApiController
             .FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
 
             var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
-        }
-        catch(Exception e)
-        {
+            if (expiryDate > DateTime.Now)
+            {
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Expired token"
+                    },
+                };
+            }
 
+            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequest.RefreshToken);
+
+            if(storedToken == null)
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Invalid tokens"
+                    },
+                };
+
+            if(storedToken.IsUsed)
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Invalid tokens"
+                    },
+                };
+
+            if(storedToken.IsRevoked)
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Invalid tokens"
+                    },
+                };
+
+            var jti = tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+            
+            if(storedToken.JwtId != jti)
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Invalid tokens"
+                    },
+                };
+
+            if(storedToken.ExpiryDate < DateTime.UtcNow)
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Expired tokens"
+                    },
+                };
+
+            storedToken.IsUsed = true;
+            _context.RefreshTokens.Update(storedToken);
+            await _context.SaveChangesAsync();
+
+            var dbUser = await _userManager.FindByIdAsync(storedToken.UserId);
+            return await GenerateJwtToken(dbUser);
+        }
+        catch (Exception e)
+        {
+            return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                    {
+                        "Server error"
+                    },
+                };
         }
     }
 
