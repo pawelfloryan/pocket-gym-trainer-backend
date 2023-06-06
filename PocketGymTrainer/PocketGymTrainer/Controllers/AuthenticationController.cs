@@ -66,7 +66,7 @@ public class AuthenticationController : ApiController
 
             if (is_created.Succeeded)
             {
-                var token = GenerateJwtToken(new_user);
+                var token = await GenerateJwtToken(new_user);
 
                 return Ok(token);
             }
