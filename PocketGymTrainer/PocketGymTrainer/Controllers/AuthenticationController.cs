@@ -236,10 +236,10 @@ public class AuthenticationController : ApiController
             }
 
             var utcExpiryDate = long.Parse(tokenInVerification.Claims
-            .FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+                .FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
 
             var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
-            if (expiryDate > DateTime.Now)
+            if (expiryDate < DateTime.Now)
             {
                 return new AuthResult()
                 {
@@ -314,6 +314,7 @@ public class AuthenticationController : ApiController
         }
         catch (Exception e)
         {
+            throw e;
             return new AuthResult()
                 {
                     Result = false,
@@ -333,6 +334,7 @@ public class AuthenticationController : ApiController
         return dateTimeVal;
     }
 
+    [ApiExplorerSettings(IgnoreApi = true)]
     public string RandomStringGeneration(int length)
     {
         var random = new Random();

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace PocketGymTrainer.Controllers;
 
 [ApiController]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("exercises")]
 public class ExerciseController : ApiController
 {
