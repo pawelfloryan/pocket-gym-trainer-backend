@@ -135,7 +135,7 @@ public class AuthenticationController : ApiController
             Result = false
         }
         );
-    }
+    }///////////////////////////////////////////////
 
     private async Task<AuthResult> GenerateJwtToken(IdentityUser user)
     {
@@ -221,10 +221,11 @@ public class AuthenticationController : ApiController
     {
         var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-        try
-        {
+        //try
+        //{
             _tokenValidationParameters.ValidateLifetime = false;
 
+            System.Diagnostics.Debug.WriteLine(_tokenValidationParameters);
             var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParameters, out var validatedToken);
 
             if (validatedToken is JwtSecurityToken jwtSecurityToken)
@@ -311,19 +312,19 @@ public class AuthenticationController : ApiController
 
             var dbUser = await _userManager.FindByIdAsync(storedToken.UserId);
             return await GenerateJwtToken(dbUser);
-        }
-        catch (Exception e)
-        {
-            throw e;
-            return new AuthResult()
-                {
-                    Result = false,
-                    Errors = new List<string>()
-                    {
-                        "Server error"
-                    },
-                };
-        }
+        //}
+        //catch (Exception e)
+        //{
+        //    throw e;
+        //    return new AuthResult()
+        //        {
+        //            Result = false,
+        //            Errors = new List<string>()
+        //            {
+        //                "Server error"
+        //            },
+        //        };
+        //}
     }
 
     private DateTime UnixTimeStampToDateTime(long unixTimeStamp)
