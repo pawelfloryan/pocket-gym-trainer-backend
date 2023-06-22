@@ -103,6 +103,7 @@ public class ExerciseController : ApiController
         return new ExerciseResponse(
             exercise.Id,
             exercise.SectionId,
+            exercise.UserId,
             exercise.Name
         );
     }
@@ -115,6 +116,7 @@ public class ExerciseController : ApiController
             ExerciseResponse response = new ExerciseResponse(
                 exercise.Id,
                 exercise.SectionId,
+                exercise.UserId,
                 exercise.Name
             );
             responseList.Add(response);

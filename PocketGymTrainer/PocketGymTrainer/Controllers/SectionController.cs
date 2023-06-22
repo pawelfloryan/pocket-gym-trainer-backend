@@ -105,7 +105,8 @@ public class SectionController : ApiController
     {
         return new SectionResponse(
             section.Id,
-            section.Name
+            section.Name,
+            section.UserId
         );
     }
 
@@ -116,7 +117,8 @@ public class SectionController : ApiController
         {
             SectionResponse response = new SectionResponse(
                 section.Id,
-                section.Name
+                section.Name,
+                section.UserId
             );
             responseList.Add(response);
         }

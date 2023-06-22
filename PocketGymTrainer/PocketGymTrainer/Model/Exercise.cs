@@ -20,24 +20,27 @@ public class Exercise
     
     private Exercise(
         Guid id, 
-        string sectionId, 
+        string sectionId,
+        string userId,
         string name
         )
     {
         Id = id;
         SectionId = sectionId;
+        UserId = userId;
         Name = name;
     }
 
-    public static ErrorOr<Exercise> Create(string sectionId, string name, Guid? id = null)
+    public static ErrorOr<Exercise> Create(string sectionId, string userId, string name, Guid? id = null)
     {
-        return new Exercise(id ?? Guid.NewGuid(), sectionId, name);
+        return new Exercise(id ?? Guid.NewGuid(), sectionId, userId, name);
     }
     
     public static ErrorOr<Exercise> From(CreateExerciseRequest request)
     {
         return Create(
             request.sectionId,
+            request.userId,
             request.name
         );
     }
@@ -46,6 +49,7 @@ public class Exercise
     {
         return Create(
             request.sectionId,
+            request.userId,
             request.name,
             id
         );
