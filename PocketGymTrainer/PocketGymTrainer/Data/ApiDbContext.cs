@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PocketGymTrainer.Contracts.Section;
 using PocketGymTrainer.Models;
 
 namespace PocketGymTrainer.Data;
@@ -18,4 +17,5 @@ public class ApiDbContext : IdentityDbContext
     public DbSet<Exercise> Exercise {get; set;}
 
     public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<Workout> Workout { get; set; }
 }

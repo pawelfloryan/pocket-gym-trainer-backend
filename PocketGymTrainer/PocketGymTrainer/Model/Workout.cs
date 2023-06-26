@@ -1,8 +1,46 @@
+using System.ComponentModel.DataAnnotations;
+using ErrorOr;
+using PocketGymTrainer.Contracts.Workout;
+
 namespace PocketGymTrainer.Models;
 
 public class Workout
 {
-    public int Id { get; set; }
-    public TimeSpan time { get; set; }
-    public string weekDay { get; set; }
+    [Key]
+    public Guid Id { get; set; }
+    public int Time { get; set; }
+    public string WeekDay { get; set; }
+    public string UserId { get; set; }
+
+    private Workout(Guid id, int time, string weekDay, string userId)
+    {
+        Id = id;
+        Time = time;
+        WeekDay = weekDay;
+        UserId = userId;
+    }
+
+    public static ErrorOr<Workout> Create(int time, string weekDay, string userId, Guid? id = null)
+    {
+        return new Workout(id ?? Guid.NewGuid(), time, weekDay, userId);
+    }
+
+    public static ErrorOr<Workout> From(CreateWorkoutRequest request)
+    {
+        return Create(
+            request.time,
+            request.weekDay,
+            request.userId
+        );
+    }
+
+    //public static ErrorOr<Section> From(Guid id, UpsertWorkoutRequest request)
+    //{
+    //    return Create(
+    //        request.time,
+    //        request.weekDay,
+    //        request.userId,
+    //        id
+    //    );
+    //}
 }
