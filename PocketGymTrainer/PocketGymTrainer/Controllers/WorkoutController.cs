@@ -42,7 +42,8 @@ public class WorkoutController : ApiController
         
         _context.Add(workout);
         await _context.SaveChangesAsync();
-        
+
+        _workoutService.removeData();
 
         return requestToWorkoutResult.Match(
             created => CreatedAtGetWorkout(workout),

@@ -48,6 +48,6 @@ public class WorkoutService : IWorkoutService
         {
             return workoutList;
         }
-        return Errors.Section.NotFound;
+        return Errors.Workout.NotFound;
     }
 }

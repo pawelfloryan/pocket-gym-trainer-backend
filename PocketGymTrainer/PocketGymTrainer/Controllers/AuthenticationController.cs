@@ -59,7 +59,7 @@ public class AuthenticationController : ApiController
             var new_user = new IdentityUser()
             {
                 Email = requestDto.Email,
-                UserName = requestDto.Email
+                UserName = requestDto.Name
             };
 
             var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -148,7 +148,7 @@ public class AuthenticationController : ApiController
             Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Name, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())

@@ -1,5 +1,6 @@
 using PocketGymTrainer.Services.Sections;
 using PocketGymTrainer.Services.Exercises;
+using PocketGymTrainer.Services.Workouts;
 using PocketGymTrainer.Data;
 using Microsoft.EntityFrameworkCore;
 using PocketGymTrainer.Configurations;
@@ -46,6 +47,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
+builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 var app = builder.Build();
 

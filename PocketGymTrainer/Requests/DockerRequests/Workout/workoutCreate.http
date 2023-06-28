@@ -1,0 +1,8 @@
+POST http://192.168.1.107:8088/workouts
+Content-Type: application/json
+
+{
+    "time": 1,
+    "weekDay": "Wednesday",
+    "userId": "nnfreg"
+}
