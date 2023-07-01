@@ -9,27 +9,27 @@ public class Workout
     [Key]
     public Guid Id { get; set; }
     public int Time { get; set; }
-    public string WeekDay { get; set; }
+    public DateTime WorkoutDate { get; set; }
     public string UserId { get; set; }
 
-    private Workout(Guid id, int time, string weekDay, string userId)
+    private Workout(Guid id, int time, DateTime workoutDate, string userId)
     {
         Id = id;
         Time = time;
-        WeekDay = weekDay;
+        WorkoutDate = workoutDate;
         UserId = userId;
     }
 
-    public static ErrorOr<Workout> Create(int time, string weekDay, string userId, Guid? id = null)
+    public static ErrorOr<Workout> Create(int time, DateTime workoutDate, string userId, Guid? id = null)
     {
-        return new Workout(id ?? Guid.NewGuid(), time, weekDay, userId);
+        return new Workout(id ?? Guid.NewGuid(), time, workoutDate, userId);
     }
 
     public static ErrorOr<Workout> From(CreateWorkoutRequest request)
     {
         return Create(
             request.time,
-            request.weekDay,
+            request.workoutDate,
             request.userId
         );
     }

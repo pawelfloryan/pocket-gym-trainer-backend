@@ -2,6 +2,6 @@ namespace PocketGymTrainer.Contracts.Workout;
 
 public record CreateWorkoutRequest(
     int time,
-    string weekDay,
+    DateTime workoutDate,
     string userId
 );

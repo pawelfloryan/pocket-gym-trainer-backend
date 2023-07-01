@@ -70,7 +70,7 @@ public class WorkoutController : ApiController
         return new WorkoutResponse(
             workout.Id,
             workout.Time,
-            workout.WeekDay,
+            workout.WorkoutDate,
             workout.UserId
         );
     }
@@ -83,7 +83,7 @@ public class WorkoutController : ApiController
             WorkoutResponse response = new WorkoutResponse(
                 workout.Id,
                 workout.Time,
-                workout.WeekDay,
+                workout.WorkoutDate,
                 workout.UserId
             );
             responseList.Add(response);
