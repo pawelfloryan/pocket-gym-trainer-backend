@@ -9,10 +9,10 @@ public class Workout
     [Key]
     public Guid Id { get; set; }
     public int Time { get; set; }
-    public DateTime WorkoutDate { get; set; }
+    public string WorkoutDate { get; set; }
     public string UserId { get; set; }
 
-    private Workout(Guid id, int time, DateTime workoutDate, string userId)
+    private Workout(Guid id, int time, string workoutDate, string userId)
     {
         Id = id;
         Time = time;
@@ -20,7 +20,7 @@ public class Workout
         UserId = userId;
     }
 
-    public static ErrorOr<Workout> Create(int time, DateTime workoutDate, string userId, Guid? id = null)
+    public static ErrorOr<Workout> Create(int time, string workoutDate, string userId, Guid? id = null)
     {
         return new Workout(id ?? Guid.NewGuid(), time, workoutDate, userId);
     }
