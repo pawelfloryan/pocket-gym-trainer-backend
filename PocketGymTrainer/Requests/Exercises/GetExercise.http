@@ -1,3 +1,0 @@
-@id = 55bd1cbf-1e01-4066-a5c9-ecf304ce8178
-
-GET http://localhost:5202/exercises/{{id}}

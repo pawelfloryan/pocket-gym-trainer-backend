@@ -1,6 +1,0 @@
-POST http://localhost:5202/sections
-Content-Type: application/json
-
-{
-    "name": "CHEST"
-}

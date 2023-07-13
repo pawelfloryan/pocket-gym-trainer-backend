@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
 using PocketGymTrainer.Services.Photos;
+using PocketGymTrainer.Services.UserStats;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
+builder.Services.AddScoped<IUserStatsService, UserStatsService>();
 builder.Services.AddScoped<IStorageProvider, StorageProvider>();
 
 var app = builder.Build();

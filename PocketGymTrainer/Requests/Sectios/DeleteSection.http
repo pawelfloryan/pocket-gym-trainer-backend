@@ -1,3 +1,0 @@
-@id = c3bed288-27e3-49b7-b986-11a513894138
-
-DELETE http://localhost:5202/sections/{{id}}
