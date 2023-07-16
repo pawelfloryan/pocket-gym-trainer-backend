@@ -29,13 +29,6 @@ public class Section
         return new Section(id ?? Guid.NewGuid(), name, userId);
     }
 
-    public static Section CreateS(string name, string userId, Guid? id = null)
-    {
-        List<Error> errors = new();
-
-        return new Section(id ?? Guid.NewGuid(), name, userId);
-    }
-
     public static ErrorOr<Section> From(CreateSectionRequest request)
     {
         return Create(

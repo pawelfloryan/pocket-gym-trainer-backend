@@ -53,7 +53,6 @@ public class SectionService : ISectionService
 
     public ErrorOr<UpsertedSection> UpsertSection(Section section)
     {
-        //addGetData();
         var isNewelyCreated = !_sections.ContainsKey(section.Id);
         _sections[section.Id] = section;
 

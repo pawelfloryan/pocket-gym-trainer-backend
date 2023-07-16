@@ -1,0 +1,7 @@
+@id = 68f75fd2-03ba-4d86-a71d-58cb25094ef2
+PUT http://192.168.1.107:8088/userStats/{{id}}
+Content-Type: application/json
+
+{
+    "entries": 10
+}

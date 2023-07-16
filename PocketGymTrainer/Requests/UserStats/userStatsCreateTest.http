@@ -2,5 +2,6 @@ POST http://192.168.1.107:8088/userStats
 Content-Type: application/json
 
 {
+    "id": "b",
     "entries": 1
 }

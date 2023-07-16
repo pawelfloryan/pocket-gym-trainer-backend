@@ -59,6 +59,28 @@ public class UserStatsController : ApiController
         );
     }
 
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpsertUserStats(string id, int entries)
+    {
+        ErrorOr<UserStats> requestToUserStatsResult = new UserStats(id, entries);
+
+        if(requestToUserStatsResult.IsError)
+        {
+            return Problem(requestToUserStatsResult.Errors);
+        }
+
+        var userStats = requestToUserStatsResult.Value;
+        ErrorOr<UpsertedUserStats> upsertUserStatsResult = _userStatsService.UpsertUserStats(userStats);
+
+        _context.Update(userStats);
+        await _context.SaveChangesAsync();
+
+        return upsertUserStatsResult.Match(
+            upserted => upserted.isNewelyCreated ? CreatedAtGetUserStats(userStats) : NoContent(),
+            errors => Problem(errors)
+        );
+    }
+
     private static UserStats MapUserStatsResponse(UserStats userStats)
     {
         return new UserStats(

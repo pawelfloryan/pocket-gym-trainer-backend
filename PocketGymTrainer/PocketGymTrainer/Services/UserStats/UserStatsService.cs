@@ -31,4 +31,12 @@ public class UserStatsService : IUserStatsService
         }
         return Errors.UserStats.NotFound;
     }
+
+    public ErrorOr<UpsertedUserStats> UpsertUserStats(Models.UserStats userStats)
+    {
+        var isNewelyCreated = !_userStats.ContainsKey(userStats.Id);
+        _userStats[userStats.Id] = userStats;
+
+        return new UpsertedUserStats(isNewelyCreated);
+    }
 }

@@ -66,7 +66,7 @@ public class ExerciseController : ApiController
     }
 
     [HttpPut("{id:guid}")]
-    public IActionResult UpsertExercise(Guid id, UpsertExerciseRequest request)
+    public async Task<IActionResult> UpsertExercise(Guid id, UpsertExerciseRequest request)
     {
         ErrorOr<Exercise> requestToExerciseResult = Exercise.From(id, request);
 
@@ -77,6 +77,9 @@ public class ExerciseController : ApiController
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
+
+        _context.Update(exercise);
+        await _context.SaveChangesAsync();
 
         return upsertExerciseResult.Match(
             upserted => upserted.isNewelyCreated ? CreatedAtGetExercise(exercise) : NoContent(),

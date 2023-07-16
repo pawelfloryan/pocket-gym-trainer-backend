@@ -69,7 +69,7 @@ public class SectionController : ApiController
     }
 
     [HttpPut("{id:guid}")]
-    public IActionResult UpsertSection(Guid id, UpsertSectionRequest request)
+    public async Task<IActionResult> UpsertSection(Guid id, UpsertSectionRequest request)
     {
         ErrorOr<Section> requestToSectionResult = Section.From(id, request);
 
@@ -80,6 +80,11 @@ public class SectionController : ApiController
 
         var section = requestToSectionResult.Value;
         ErrorOr<UpsertedSection> upsertSectionResult = _sectionService.UpsertSection(section);
+        
+        _context.Update(section);
+        await _context.SaveChangesAsync();
+
+        _sectionService.removeData();
 
         return upsertSectionResult.Match(
             upserted => upserted.isNewelyCreated ? CreatedAtGetSection(section) : NoContent(),
