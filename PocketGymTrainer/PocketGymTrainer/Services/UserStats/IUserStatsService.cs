@@ -8,4 +8,5 @@ public interface IUserStatsService
     ErrorOr<Created> CreateUserStats(Models.UserStats userStats);
     ErrorOr<Models.UserStats> GetUserStats(string id);
     ErrorOr<UpsertedUserStats> UpsertUserStats(Models.UserStats userStats);
+    void removeData();
 }

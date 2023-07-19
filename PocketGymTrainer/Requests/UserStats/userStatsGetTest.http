@@ -1,2 +1,2 @@
-@id = 999de7f5-7713-480d-8600-1ba6cdbccc24
+@id = hfhwerfhhefhehgberuhiofejrihgiuerhi
 GET http://192.168.1.107:8088/userStats/{{id}}

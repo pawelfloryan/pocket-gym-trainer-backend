@@ -6,6 +6,7 @@ using PocketGymTrainer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PocketGymTrainer.Contracts.UserStats;
 
 namespace PocketGymTrainer.Controllers;
 
@@ -42,6 +43,8 @@ public class UserStatsController : ApiController
         _context.Add(userStats);
         await _context.SaveChangesAsync();
 
+        _userStatsService.removeData();
+
         return requestToUserStatsResult.Match(
             created => CreatedAtGetUserStats(userStats),
             errors => Problem(errors)
@@ -52,6 +55,8 @@ public class UserStatsController : ApiController
     public async Task<IActionResult> GetUserStats(string id)
     {
         ErrorOr<UserStats> getUserStatsResult = _userStatsService.GetUserStats(id);
+
+        _userStatsService.removeData();
 
         return getUserStatsResult.Match(
             userStats => Ok(MapUserStatsResponse(userStats)),
@@ -75,15 +80,17 @@ public class UserStatsController : ApiController
         _context.Update(userStats);
         await _context.SaveChangesAsync();
 
+        _userStatsService.removeData();
+
         return upsertUserStatsResult.Match(
             upserted => upserted.isNewelyCreated ? CreatedAtGetUserStats(userStats) : NoContent(),
             errors => Problem(errors)
         );
     }
 
-    private static UserStats MapUserStatsResponse(UserStats userStats)
+    private static UserStatsResponse MapUserStatsResponse(UserStats userStats)
     {
-        return new UserStats(
+        return new UserStatsResponse(
             userStats.Id,
             userStats.Entries
         );
