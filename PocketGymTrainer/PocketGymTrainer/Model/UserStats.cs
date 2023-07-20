@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using ErrorOr;
+using PocketGymTrainer.Contracts.UserStats;
 
 namespace PocketGymTrainer.Models;
 
@@ -20,11 +21,19 @@ public class UserStats
         return new UserStats(id, entries);
     }
 
-    public static ErrorOr<UserStats> From(UserStats request)
+    public static ErrorOr<UserStats> From(CreateUserStatsRequest request)
     {
         return Create(
-            request.Id,
-            request.Entries
+            request.id,
+            request.entries
+        );
+    }
+
+    public static ErrorOr<UserStats> From(string id, UpsertUserStatsRequest request)
+    {
+        return Create(
+            id,
+            request.entries
         );
     }
 }

@@ -28,7 +28,7 @@ public class UserStatsController : ApiController
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateUserStats(UserStats request)
+    public async Task<IActionResult> CreateUserStats(CreateUserStatsRequest request)
     {
         ErrorOr<UserStats> requestToUserStatsResult = UserStats.From(request);
         
@@ -65,9 +65,9 @@ public class UserStatsController : ApiController
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpsertUserStats(string id, int entries)
+    public async Task<IActionResult> UpsertUserStats(string id, UpsertUserStatsRequest request)
     {
-        ErrorOr<UserStats> requestToUserStatsResult = new UserStats(id, entries);
+        ErrorOr<UserStats> requestToUserStatsResult = UserStats.From(id, request);
 
         if(requestToUserStatsResult.IsError)
         {
