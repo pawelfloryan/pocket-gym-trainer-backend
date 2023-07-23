@@ -79,7 +79,7 @@ public class UserStatsController : ApiController
 
         _context.Update(userStats);
         await _context.SaveChangesAsync();
-
+        
         _userStatsService.removeData();
 
         return upsertUserStatsResult.Match(
