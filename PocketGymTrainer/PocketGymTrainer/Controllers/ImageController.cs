@@ -57,29 +57,29 @@ public class ImageController : ApiController
     //    );
     //}
 
-    private static SectionResponse MapSectionResponse(Section section)
-    {
-        return new SectionResponse(
-            section.Id,
-            section.Name,
-            section.UserId
-        );
-    }
-
-    private static List<SectionResponse> MapSectionListResponseAsync(List<Section> sectionList)
-    {
-        List<SectionResponse> responseList = new();
-        foreach(Section section in sectionList)
-        {
-            SectionResponse response = new SectionResponse(
-                section.Id,
-                section.Name,
-                section.UserId
-            );
-            responseList.Add(response);
-        }
-        return responseList;
-    }
+    //private static SectionResponse MapSectionResponse(Section section)
+    //{
+    //    return new SectionResponse(
+    //        section.Id,
+    //        section.Name,
+    //        section.UserId
+    //    );
+    //}
+//
+    //private static List<SectionResponse> MapSectionListResponseAsync(List<Section> sectionList)
+    //{
+    //    List<SectionResponse> responseList = new();
+    //    foreach(Section section in sectionList)
+    //    {
+    //        SectionResponse response = new SectionResponse(
+    //            section.Id,
+    //            section.Name,
+    //            section.UserId
+    //        );
+    //        responseList.Add(response);
+    //    }
+    //    return responseList;
+    //}
 
     //private CreatedAtActionResult CreatedAtGetSection(Section section)
     //{

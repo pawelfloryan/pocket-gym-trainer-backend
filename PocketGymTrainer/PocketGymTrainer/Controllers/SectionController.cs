@@ -111,7 +111,8 @@ public class SectionController : ApiController
         return new SectionResponse(
             section.Id,
             section.Name,
-            section.UserId
+            section.UserId,
+            section.ExercisesPerformed
         );
     }
 
@@ -123,7 +124,8 @@ public class SectionController : ApiController
             SectionResponse response = new SectionResponse(
                 section.Id,
                 section.Name,
-                section.UserId
+                section.UserId,
+                section.ExercisesPerformed
             );
             responseList.Add(response);
         }

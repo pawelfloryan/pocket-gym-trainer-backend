@@ -11,29 +11,32 @@ public class Section
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string UserId { get; set; }
+    public int ExercisesPerformed { get; set; }
 
     private Section()
     {
 
     }
     
-    private Section(Guid id, string name, string userId)
+    private Section(Guid id, string name, string userId, int exercisesPerformed)
     {
         Id = id;
         Name = name;
         UserId = userId;
+        ExercisesPerformed = exercisesPerformed;
     }
 
-    public static ErrorOr<Section> Create(string name, string userId, Guid? id = null)
+    public static ErrorOr<Section> Create(string name, string userId, int exercisesPerformed, Guid? id = null)
     {
-        return new Section(id ?? Guid.NewGuid(), name, userId);
+        return new Section(id ?? Guid.NewGuid(), name, userId, exercisesPerformed);
     }
 
     public static ErrorOr<Section> From(CreateSectionRequest request)
     {
         return Create(
             request.name,
-            request.userId
+            request.userId,
+            request.exercisesPerformed
         );
     }
 
@@ -42,6 +45,7 @@ public class Section
         return Create(
             request.name,
             request.userId,
+            request.exercisesPerformed,
             id
         );
     }
