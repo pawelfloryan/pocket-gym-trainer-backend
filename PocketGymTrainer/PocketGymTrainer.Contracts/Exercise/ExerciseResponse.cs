@@ -4,5 +4,6 @@ public record ExerciseResponse(
     Guid id,
     string sectionId,
     string userId,
-    string name
+    string name,
+    bool completed
 );

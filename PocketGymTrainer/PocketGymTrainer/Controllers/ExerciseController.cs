@@ -107,7 +107,8 @@ public class ExerciseController : ApiController
             exercise.Id,
             exercise.SectionId,
             exercise.UserId,
-            exercise.Name
+            exercise.Name,
+            exercise.Completed
         );
     }
 
@@ -120,7 +121,8 @@ public class ExerciseController : ApiController
                 exercise.Id,
                 exercise.SectionId,
                 exercise.UserId,
-                exercise.Name
+                exercise.Name,
+                exercise.Completed
             );
             responseList.Add(response);
         }
