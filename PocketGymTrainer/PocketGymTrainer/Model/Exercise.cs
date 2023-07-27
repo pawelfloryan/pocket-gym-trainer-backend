@@ -12,40 +12,36 @@ public class Exercise
     public string SectionId { get; set; }
     public string UserId { get; set; }
     public string Name { get; set; }
-    public bool Completed { get; set; }
 
     private Exercise()
     {
 
     }
-
+    
     private Exercise(
-        Guid id,
+        Guid id, 
         string sectionId,
         string userId,
-        string name,
-        bool completed
+        string name
         )
     {
         Id = id;
         SectionId = sectionId;
         UserId = userId;
         Name = name;
-        Completed = completed;
     }
 
-    public static ErrorOr<Exercise> Create(string sectionId, string userId, string name, bool completed, Guid? id = null)
+    public static ErrorOr<Exercise> Create(string sectionId, string userId, string name, Guid? id = null)
     {
-        return new Exercise(id ?? Guid.NewGuid(), sectionId, userId, name, completed);
+        return new Exercise(id ?? Guid.NewGuid(), sectionId, userId, name);
     }
-
+    
     public static ErrorOr<Exercise> From(CreateExerciseRequest request)
     {
         return Create(
             request.sectionId,
             request.userId,
-            request.name,
-            request.completed
+            request.name
         );
     }
 
@@ -55,7 +51,6 @@ public class Exercise
             request.sectionId,
             request.userId,
             request.name,
-            request.completed,
             id
         );
     }
