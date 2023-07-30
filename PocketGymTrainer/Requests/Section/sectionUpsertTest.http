@@ -1,8 +1,9 @@
-@id = b1737d2b-1d3c-4f38-b477-d45526e1a9e1
+@id = 6bfe049e-efdd-4330-8bfd-0be00fdce5c4
 PUT http://192.168.1.107:8088/sections/{{id}}
 Content-Type: application/json
 
 {
-    "name": "CHEST",
-    "userId": "abc"
+    "name": "STRETCHING",
+    "userId": "329c8676-446e-4c4f-93fc-16dd91773782",
+    "exercisesPerformed": 0
 }

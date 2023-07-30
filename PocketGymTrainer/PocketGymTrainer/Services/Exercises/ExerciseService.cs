@@ -66,4 +66,19 @@ public class ExerciseService : IExerciseService
 
         return Result.Deleted;
     }
+
+    public ErrorOr<Deleted> DeleteExerciseList(Guid id)
+    {
+        addGetData();
+        var exerciseList = _exercises.Values.Where(exercise => exercise.SectionId == id.ToString()).ToList();
+        for(int i=0; i<exerciseList.Count; i++)
+        {
+            _exercises.Remove(exerciseList[i].Id);
+        }
+        foreach(Exercise exercise in exerciseList){
+            _context.Remove(exercise);
+        }
+
+        return Result.Deleted;
+    }
 }

@@ -87,7 +87,7 @@ public class ExerciseController : ApiController
         );
     }
 
-    [HttpDelete("{id:guid}")]
+    [HttpDelete("single/{id:guid}")]
     public async Task<IActionResult> DeleteExercise(Guid id)
     {
         ErrorOr<Deleted> deleteExerciseResult = _exerciseService.DeleteExercise(id);
@@ -96,6 +96,20 @@ public class ExerciseController : ApiController
         _exerciseService.removeData();
         
         return deleteExerciseResult.Match(
+            deleted => NoContent(),
+            errors => Problem(errors)
+        );
+    }
+
+    [HttpDelete("list/{id:guid}")]
+    public async Task<IActionResult> DeleteExerciseList(Guid id)
+    {
+        ErrorOr<Deleted> deleteExerciseListResult = _exerciseService.DeleteExerciseList(id);
+        await _context.SaveChangesAsync();
+        
+        _exerciseService.removeData();
+        
+        return deleteExerciseListResult.Match(
             deleted => NoContent(),
             errors => Problem(errors)
         );
