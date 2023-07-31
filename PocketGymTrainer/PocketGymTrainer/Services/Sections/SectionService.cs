@@ -14,21 +14,31 @@ public class SectionService : ISectionService
     {
         _context = context;
     }
-    
+
     private static readonly Dictionary<Guid, Section> _sections = new();
     private static readonly Dictionary<Guid, Section> _sectionsCreated = new();
 
-    public ErrorOr<Created> CreateSection(Section section)
+    public ErrorOr<Section> CreateSection(Section section)
     {
-        _sectionsCreated.Add(section.Id, section);
-
-        return Result.Created;
+        addGetData();
+        Console.WriteLine(_sections.Count);
+        if (_sections.Count > 9)
+        {
+            Console.WriteLine("error");
+            return Errors.Section.NotFound;
+        }
+        else
+        {
+            Console.WriteLine("good");
+            _sectionsCreated.Add(section.Id, section);
+            return Result.Created;
+        }
     }
-    
+
     public Dictionary<Guid, Section> addGetData()
     {
         var allSections = _context.Section.ToList();
-        foreach(var element in allSections)
+        foreach (var element in allSections)
         {
             _sections.Add(element.Id, element);
         }
@@ -44,7 +54,7 @@ public class SectionService : ISectionService
     {
         addGetData();
         List<Section> sectionList = _sections.Values.ToList();
-        if(_sections.Count > 0)
+        if (_sections.Count > 0)
         {
             return sectionList;
         }
