@@ -41,7 +41,12 @@ public class SectionController : ApiController
         }
 
         var section = requestToSectionResult.Value;
-        ErrorOr<Section> createdSectionResult = _sectionService.CreateSection(section);
+        ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
+
+        if (createdSectionResult.IsError)
+        {
+            return Problem(createdSectionResult.Errors);
+        }
         
         _context.Add(section);
         await _context.SaveChangesAsync();

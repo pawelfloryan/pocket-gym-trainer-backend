@@ -5,7 +5,7 @@ namespace PocketGymTrainer.Services.Sections;
 
 public interface ISectionService
 {
-    ErrorOr<Section> CreateSection(Section section);
+    ErrorOr<Created> CreateSection(Section section);
     ErrorOr<List<Section>> GetSection();
     ErrorOr<UpsertedSection> UpsertSection(Section section);
     ErrorOr<Deleted> DeleteSection(Guid id);

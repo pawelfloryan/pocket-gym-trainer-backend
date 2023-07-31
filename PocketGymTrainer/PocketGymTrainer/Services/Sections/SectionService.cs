@@ -18,14 +18,15 @@ public class SectionService : ISectionService
     private static readonly Dictionary<Guid, Section> _sections = new();
     private static readonly Dictionary<Guid, Section> _sectionsCreated = new();
 
-    public ErrorOr<Section> CreateSection(Section section)
+    public ErrorOr<Created> CreateSection(Section section)
     {
         addGetData();
         Console.WriteLine(_sections.Count);
         if (_sections.Count > 9)
         {
+            removeData();
             Console.WriteLine("error");
-            return Errors.Section.NotFound;
+            return Errors.Section.TooMany;
         }
         else
         {

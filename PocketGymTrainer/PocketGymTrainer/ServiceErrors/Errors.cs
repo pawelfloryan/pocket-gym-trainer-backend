@@ -12,9 +12,8 @@ public static class Errors
             description: "Section not found"
         );
 
-        public static Error TooMany => Error.Custom(
-            type: 406,
-            code: "Section.Custom",
+        public static Error TooMany => Error.Conflict(
+            code: "Section.TooMany",
             description: "You can only create 10 sections"
         );
     }
