@@ -25,12 +25,10 @@ public class SectionService : ISectionService
         if (_sections.Count > 9)
         {
             removeData();
-            Console.WriteLine("error");
             return Errors.Section.TooMany;
         }
         else
         {
-            Console.WriteLine("good");
             _sectionsCreated.Add(section.Id, section);
             return Result.Created;
         }

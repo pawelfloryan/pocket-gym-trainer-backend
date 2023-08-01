@@ -24,6 +24,11 @@ public static class Errors
             code: "Exercise.NotFound",
             description: "Exercise not found"
         );
+
+        public static Error TooMany => Error.Conflict(
+            code: "Exercise.TooMany",
+            description: "You can only create 15 exercises"
+        );
     }
 
     public static class Workout
