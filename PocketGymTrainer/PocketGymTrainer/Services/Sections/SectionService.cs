@@ -20,8 +20,7 @@ public class SectionService : ISectionService
 
     public ErrorOr<Created> CreateSection(Section section)
     {
-        addGetData();
-        Console.WriteLine(_sections.Count);
+        addData(section);
         if (_sections.Count > 9)
         {
             removeData();
@@ -32,6 +31,16 @@ public class SectionService : ISectionService
             _sectionsCreated.Add(section.Id, section);
             return Result.Created;
         }
+    }
+
+    public Dictionary<Guid, Section> addData(Section section)
+    {
+        var allSections = _context.Section.Where(e => e.UserId == section.UserId).ToList();
+        foreach (var element in allSections)
+        {
+            _sections.Add(element.Id, element);
+        }
+        return _sections;
     }
 
     public Dictionary<Guid, Section> addGetData()

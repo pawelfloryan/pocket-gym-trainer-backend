@@ -3,7 +3,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNWRmNTkyLTM0ZGQtNDg5Mi1iZGRiLTAzNmY3YTYxMzdiMSIsIm5hbWUiOiJqYW5Aa293YWxza2kucGwiLCJlbWFpbCI6ImphbkBrb3dhbHNraS5wbCIsImp0aSI6IjNkMDYxZGUyLTJiZTUtNDIyYS1hMjkwLTM4ODJkM2UwN2M2ZSIsImlhdCI6MTY4NTcyMTkzOSwibmJmIjoxNjg1NzIxOTM5LCJleHAiOjE2ODU3MjU1Mzl9.miUNctFnFeY43meAEXRj-nS7ArfF_cygGykoPivx9bg
 
 {
-    "sectionId": "eb328866-4874-44f6-b438-609491299885",
-    "userId": "nnfreg",
+    "sectionId": "1397f67f-0fed-4234-8af0-2a0454fb4651",
+    "userId": "329c8676-446e-4c4f-93fc-16dd91773782",
     "name": "Pull ups"
 }
