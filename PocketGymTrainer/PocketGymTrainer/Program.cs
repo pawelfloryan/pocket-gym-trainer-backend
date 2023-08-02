@@ -14,7 +14,7 @@ using PocketGymTrainer.Services.UserStats;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseSentry();
+//builder.WebHost.UseSentry();
 
 // Add services to the container.
 var conn = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -59,7 +59,7 @@ builder.Services.AddScoped<IStorageProvider, StorageProvider>();
 var app = builder.Build();
 
 // Sentry
-app.UseSentryTracing();
+//app.UseSentryTracing();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
