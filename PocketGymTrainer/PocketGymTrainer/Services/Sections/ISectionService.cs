@@ -9,5 +9,7 @@ public interface ISectionService
     ErrorOr<List<Section>> GetSection();
     ErrorOr<UpsertedSection> UpsertSection(Section section);
     ErrorOr<Deleted> DeleteSection(Guid id);
+    Dictionary<Guid, Section> addData(Section section);
+    Dictionary<Guid, Section> addGetData();
     void removeData();
 }

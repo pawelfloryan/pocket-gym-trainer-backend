@@ -18,15 +18,33 @@ public class ExerciseService : IExerciseService
     private static readonly Dictionary<Guid, Exercise> _exercisesCreated = new();
     public ErrorOr<Created> CreateExercise(Exercise exercise)
     {
-        _exercisesCreated.Add(exercise.Id, exercise);
+        addData(exercise);
+        if (_exercises.Count > 14)
+        {
+            removeData();
+            return Errors.Exercise.TooMany;
+        }
+        else
+        {
+            _exercisesCreated.Add(exercise.Id, exercise);
+            return Result.Created;
+        }
+    }
 
-        return Result.Created;
+    public Dictionary<Guid, Exercise> addData(Exercise exercise)
+    {
+        var allExercises = _context.Exercise.Where(e => e.UserId == exercise.UserId).ToList();
+        foreach (var element in allExercises)
+        {
+            _exercises.Add(element.Id, element);
+        }
+        return _exercises;
     }
 
     public Dictionary<Guid, Exercise> addGetData()
     {
         var allExercises = _context.Exercise.ToList();
-        foreach(var element in allExercises)
+        foreach (var element in allExercises)
         {
             _exercises.Add(element.Id, element);
         }
@@ -41,8 +59,8 @@ public class ExerciseService : IExerciseService
     public ErrorOr<List<Exercise>> GetExercise()
     {
         addGetData();
-        List<Exercise> exerciseList = _exercises.Values.ToList(); 
-        if(_exercises.Count > 0)
+        List<Exercise> exerciseList = _exercises.Values.ToList();
+        if (_exercises.Count > 0)
         {
             return exerciseList;
         }
@@ -71,11 +89,12 @@ public class ExerciseService : IExerciseService
     {
         addGetData();
         var exerciseList = _exercises.Values.Where(exercise => exercise.SectionId == id.ToString()).ToList();
-        for(int i=0; i<exerciseList.Count; i++)
+        for (int i = 0; i < exerciseList.Count; i++)
         {
             _exercises.Remove(exerciseList[i].Id);
         }
-        foreach(Exercise exercise in exerciseList){
+        foreach (Exercise exercise in exerciseList)
+        {
             _context.Remove(exercise);
         }
 

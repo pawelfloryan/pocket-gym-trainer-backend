@@ -10,5 +10,7 @@ public interface IExerciseService
     ErrorOr<UpsertedExercise> UpsertExercise(Exercise exercise);
     ErrorOr<Deleted> DeleteExercise(Guid id);
     ErrorOr<Deleted> DeleteExerciseList(Guid id);
+    Dictionary<Guid, Exercise> addData(Exercise exercise);
+    Dictionary<Guid, Exercise> addGetData();
     void removeData();
 }

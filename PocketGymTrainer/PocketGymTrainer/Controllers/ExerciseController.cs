@@ -40,6 +40,10 @@ public class ExerciseController : ApiController
         var exercise = requestToExerciseResult.Value;
         ErrorOr<Created> createdExerciseResult = _exerciseService.CreateExercise(exercise);
 
+        if(createdExerciseResult.IsError){
+            return Problem(createdExerciseResult.Errors);
+        }
+
         _context.Add(exercise);
         await _context.SaveChangesAsync();
 
