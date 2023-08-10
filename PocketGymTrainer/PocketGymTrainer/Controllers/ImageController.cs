@@ -27,25 +27,7 @@ public class ImageController : ApiController
         _context = context;
     }
     
-    //[HttpPost]
-    //public async Task<IActionResult> SaveImage(CreateSectionRequest request)
-    //{
-    //    ErrorOr<Section> requestToSectionResult = Section.From(request);
-//
-    //    if (requestToSectionResult.IsError)
-    //    {
-    //        return Problem(requestToSectionResult.Errors);
-    //    }
-//
-    //    var section = requestToSectionResult.Value;
-    //    ErrorOr<Created> createdSectionResult = _sectionService.CreateSection(section);
-//
-    //    return requestToSectionResult.Match(
-    //        created => CreatedAtGetSection(section),
-    //        errors => Problem(errors)
-    //    );
-    //}
-//
+    
     //[HttpGet]
     //public async Task<IActionResult> GetImage()
     //{
