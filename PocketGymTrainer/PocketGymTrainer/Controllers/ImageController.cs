@@ -26,18 +26,6 @@ public class ImageController : ApiController
         _storageProvider = storageProvider;
         _context = context;
     }
-    
-    
-    //[HttpGet]
-    //public async Task<IActionResult> GetImage()
-    //{
-    //    ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection();
-//
-    //    return getSectionResult.Match(
-    //        allSections => Ok(MapSectionListResponseAsync(allSections)),
-    //        errors => Problem(errors)
-    //    );
-    //}
 
     //private static SectionResponse MapSectionResponse(Section section)
     //{
