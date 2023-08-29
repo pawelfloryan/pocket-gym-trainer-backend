@@ -55,16 +55,16 @@ public class ExerciseController : ApiController
         );
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetExercise(Exercise exercise)
+    [HttpGet("{userId:guid}")]
+    public IActionResult GetExercise(Guid userId)
     {
-        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(exercise);
-        var allExercises = await _context.Exercise.ToListAsync();
-
+        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(userId);
+        
+        List<Exercise> exercises = getExerciseResult.Value;
         _exerciseService.removeData();
 
         return getExerciseResult.Match(
-            exercise => Ok(MapExerciseListResponseAsync(allExercises)),
+            exercise => Ok(MapExerciseListResponseAsync(exercises)),
             errors => Problem(errors)
         );
     }
@@ -92,9 +92,9 @@ public class ExerciseController : ApiController
     }
 
     [HttpDelete("single/{id:guid}")]
-    public async Task<IActionResult> DeleteExercise(Guid id, Exercise exercise)
+    public async Task<IActionResult> DeleteExercise(Guid id)
     {
-        ErrorOr<Deleted> deleteExerciseResult = _exerciseService.DeleteExercise(id, exercise);
+        ErrorOr<Deleted> deleteExerciseResult = _exerciseService.DeleteExercise(id);
         await _context.SaveChangesAsync();
         
         _exerciseService.removeData();
@@ -106,9 +106,9 @@ public class ExerciseController : ApiController
     }
 
     [HttpDelete("list/{id:guid}")]
-    public async Task<IActionResult> DeleteExerciseList(Guid id, Exercise exercise)
+    public async Task<IActionResult> DeleteExerciseList(Guid id)
     {
-        ErrorOr<Deleted> deleteExerciseListResult = _exerciseService.DeleteExerciseList(id, exercise);
+        ErrorOr<Deleted> deleteExerciseListResult = _exerciseService.DeleteExerciseList(id);
         await _context.SaveChangesAsync();
         
         _exerciseService.removeData();
