@@ -16,7 +16,7 @@ public class ExerciseService : IExerciseService
 
     private static readonly Dictionary<Guid, Exercise> _exercises = new();
     private static readonly Dictionary<Guid, Exercise> _exercisesCreated = new();
-
+    
     public ErrorOr<Created> CreateExercise(Exercise exercise)
     {
         addData(exercise);
@@ -47,16 +47,9 @@ public class ExerciseService : IExerciseService
         _exercises.Clear();
     }
 
-    public ErrorOr<List<Exercise>> GetExercise(Guid userId)
+    public ErrorOr<List<Exercise>> GetExercise(Exercise exercise)
     {
-        List<Exercise> exerciseList =
-        _context.Exercise.Where(e => e.UserId == userId.ToString()).ToList();
-
-        foreach (var element in exerciseList)
-        {
-            _exercises.Add(element.Id, element);
-        }
-
+        List<Exercise> exerciseList = _context.Exercise.Where(e => e.UserId == exercise.UserId).ToList();
         if (_exercises.Count > 0)
         {
             return exerciseList;
@@ -72,45 +65,27 @@ public class ExerciseService : IExerciseService
         return new UpsertedExercise(isNewelyCreated);
     }
 
-    public ErrorOr<Deleted> DeleteExercise(Guid id)
+    public ErrorOr<Deleted> DeleteExercise(Guid id, Exercise exercise)
     {
-        Exercise? exercise = _context.Exercise.SingleOrDefault(e => e.Id == id);
-        if (exercise == null)
-        {
-            return Errors.Exercise.NotFound;
-        }
-        else
-        {
-            addData(exercise);
-            var element = _exercises[id];
-            _exercises.Remove(id);
-            _context.Remove(element);
-        }
+        addData(exercise);
+        var element = _exercises[id];
+        _exercises.Remove(id);
+        _context.Remove(element);
 
         return Result.Deleted;
     }
 
-    public ErrorOr<Deleted> DeleteExerciseList(Guid id)
+    public ErrorOr<Deleted> DeleteExerciseList(Guid id, Exercise exercise)
     {
-        Exercise? exercise = _context.Exercise.FirstOrDefault(e => e.SectionId == id.ToString());
-        if (exercise == null)
+        addData(exercise);
+        var exerciseList = _exercises.Values.Where(exercise => exercise.SectionId == id.ToString()).ToList();
+        for (int i = 0; i < exerciseList.Count; i++)
         {
-            return Errors.Exercise.NotFound;
+            _exercises.Remove(exerciseList[i].Id);
         }
-        else
+        foreach (Exercise element in exerciseList)
         {
-            addData(exercise);
-            var exerciseList = _exercises.Values.Where(exercise => exercise.SectionId == id.ToString()).ToList();
-
-            for (int i = 0; i < exerciseList.Count; i++)
-            {
-                _exercises.Remove(exerciseList[i].Id);
-            }
-
-            foreach (Exercise element in exerciseList)
-            {
-                _context.Remove(element);
-            }
+            _context.Remove(element);
         }
 
         return Result.Deleted;
