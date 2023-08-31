@@ -1,9 +1,9 @@
-@id = 25f143dd-aef4-4342-981d-38ac11172b98
+@id = 120b11ed-cb8f-404e-9111-911ce58f024d
 PUT http://192.168.1.107:8088/exercises/{{id}}
 Content-Type: application/json
 
 {
-    "sectionId": "f4d7ab1a-2167-44e7-9844-92dc6cb4c9f4",
-    "userId": "40621c3d-29c6-4102-a756-51459be7f636",
+    "sectionId": "1397f67f-0fed-4234-8af0-2a0454fb4651",
+    "userId": "329c8676-446e-4c4f-93fc-16dd91773782",
     "name": "Incline dumbell bench press"
 }
