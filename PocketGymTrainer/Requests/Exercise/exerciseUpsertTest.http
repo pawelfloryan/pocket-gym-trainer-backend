@@ -1,4 +1,4 @@
-@id = 120b11ed-cb8f-404e-9111-911ce58f024d
+@id = 6fbc12a3-3cca-4892-9233-9af7e06778af
 PUT http://192.168.1.107:8088/exercises/{{id}}
 Content-Type: application/json
 

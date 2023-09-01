@@ -81,6 +81,7 @@ public class ExerciseController : ApiController
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
+        Console.WriteLine(upsertExerciseResult.Value);
 
         _context.Update(exercise);
         await _context.SaveChangesAsync();
