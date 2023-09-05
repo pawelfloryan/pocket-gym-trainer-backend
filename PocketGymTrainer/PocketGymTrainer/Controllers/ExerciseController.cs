@@ -25,7 +25,7 @@ public class ExerciseController : ApiController
         _exerciseService = exerciseService;
         _context = context;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateExercise(CreateExerciseRequest request)
     {
@@ -40,7 +40,8 @@ public class ExerciseController : ApiController
         var exercise = requestToExerciseResult.Value;
         ErrorOr<Created> createdExerciseResult = _exerciseService.CreateExercise(exercise);
 
-        if(createdExerciseResult.IsError){
+        if (createdExerciseResult.IsError)
+        {
             return Problem(createdExerciseResult.Errors);
         }
 
@@ -59,7 +60,7 @@ public class ExerciseController : ApiController
     public IActionResult GetExercise(Guid id)
     {
         ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(id);
-        
+
         List<Exercise> exercises = getExerciseResult.Value;
         _exerciseService.removeData();
 
@@ -74,17 +75,25 @@ public class ExerciseController : ApiController
     {
         ErrorOr<Exercise> requestToExerciseResult = Exercise.From(id, request);
 
-        if(requestToExerciseResult.IsError)
+        if (requestToExerciseResult.IsError)
         {
             return Problem(requestToExerciseResult.Errors);
         }
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
-        Console.WriteLine(upsertExerciseResult.Value);
+        Console.WriteLine(upsertExerciseResult.Value.isNewelyCreated);
 
-        _context.Update(exercise);
-        await _context.SaveChangesAsync();
+        if (upsertExerciseResult.Value.isNewelyCreated)
+        {
+            _context.Add(exercise);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            _context.Update(exercise);
+            await _context.SaveChangesAsync();
+        }
 
         return upsertExerciseResult.Match(
             upserted => upserted.isNewelyCreated ? CreatedAtGetExercise(exercise) : NoContent(),
@@ -97,9 +106,9 @@ public class ExerciseController : ApiController
     {
         ErrorOr<Deleted> deleteExerciseResult = _exerciseService.DeleteExercise(id);
         await _context.SaveChangesAsync();
-        
+
         _exerciseService.removeData();
-        
+
         return deleteExerciseResult.Match(
             deleted => NoContent(),
             errors => Problem(errors)
@@ -111,9 +120,9 @@ public class ExerciseController : ApiController
     {
         ErrorOr<Deleted> deleteExerciseListResult = _exerciseService.DeleteExerciseList(id);
         await _context.SaveChangesAsync();
-        
+
         _exerciseService.removeData();
-        
+
         return deleteExerciseListResult.Match(
             deleted => NoContent(),
             errors => Problem(errors)
@@ -133,7 +142,7 @@ public class ExerciseController : ApiController
     private static List<ExerciseResponse> MapExerciseListResponseAsync(List<Exercise> exerciseList)
     {
         List<ExerciseResponse> responseList = new();
-        foreach(Exercise exercise in exerciseList)
+        foreach (Exercise exercise in exerciseList)
         {
             ExerciseResponse response = new ExerciseResponse(
                 exercise.Id,
