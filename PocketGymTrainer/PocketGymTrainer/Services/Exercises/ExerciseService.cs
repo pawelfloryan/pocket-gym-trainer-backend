@@ -67,8 +67,6 @@ public class ExerciseService : IExerciseService
     public ErrorOr<UpsertedExercise> UpsertExercise(Exercise exercise)
     {
         addData(exercise);
-        Console.WriteLine(_exercises.Count);
-        Console.WriteLine("=========================================");
         var isNewelyCreated = !_exercises.ContainsKey(exercise.Id);
         _exercises[exercise.Id] = exercise;
 
