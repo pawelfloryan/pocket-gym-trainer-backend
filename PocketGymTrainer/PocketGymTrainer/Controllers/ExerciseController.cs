@@ -84,16 +84,23 @@ public class ExerciseController : ApiController
         ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
         Console.WriteLine(upsertExerciseResult.Value.isNewelyCreated);
 
-        if (upsertExerciseResult.Value.isNewelyCreated)
+        var existingExercise = _context.Exercise.Find(exercise.Id);
+
+        if (existingExercise == null)
         {
             _context.Add(exercise);
             await _context.SaveChangesAsync();
+
+            _exerciseService.removeData();
         }
         else
         {
-            _context.Update(exercise);
+            _context.Entry(existingExercise).CurrentValues.SetValues(exercise);
             await _context.SaveChangesAsync();
+            
+            _exerciseService.removeData();
         }
+
 
         return upsertExerciseResult.Match(
             upserted => upserted.isNewelyCreated ? CreatedAtGetExercise(exercise) : NoContent(),
