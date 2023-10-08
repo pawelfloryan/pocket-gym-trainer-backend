@@ -56,10 +56,10 @@ public class ExerciseController : ApiController
         );
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetExercise(Guid id)
+    [HttpGet("{userId:guid}")]
+    public IActionResult GetExercise(Guid userId)
     {
-        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(id);
+        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(userId);
 
         List<Exercise> exercises = getExerciseResult.Value;
         _exerciseService.removeData();
@@ -97,7 +97,7 @@ public class ExerciseController : ApiController
         {
             _context.Entry(existingExercise).CurrentValues.SetValues(exercise);
             await _context.SaveChangesAsync();
-            
+
             _exerciseService.removeData();
         }
 
