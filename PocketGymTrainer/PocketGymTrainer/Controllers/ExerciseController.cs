@@ -70,44 +70,6 @@ public class ExerciseController : ApiController
         );
     }
 
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpsertExercise(Guid id, UpsertExerciseRequest request)
-    {
-        ErrorOr<Exercise> requestToExerciseResult = Exercise.From(id, request);
-
-        if (requestToExerciseResult.IsError)
-        {
-            return Problem(requestToExerciseResult.Errors);
-        }
-
-        var exercise = requestToExerciseResult.Value;
-        ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
-        Console.WriteLine(upsertExerciseResult.Value.isNewelyCreated);
-
-        var existingExercise = _context.Exercise.Find(exercise.Id);
-
-        if (existingExercise == null)
-        {
-            _context.Add(exercise);
-            await _context.SaveChangesAsync();
-
-            _exerciseService.removeData();
-        }
-        else
-        {
-            _context.Entry(existingExercise).CurrentValues.SetValues(exercise);
-            await _context.SaveChangesAsync();
-
-            _exerciseService.removeData();
-        }
-
-
-        return upsertExerciseResult.Match(
-            upserted => upserted.isNewelyCreated ? CreatedAtGetExercise(exercise) : NoContent(),
-            errors => Problem(errors)
-        );
-    }
-
     [HttpDelete("single/{id:guid}")]
     public async Task<IActionResult> DeleteExercise(Guid id)
     {
