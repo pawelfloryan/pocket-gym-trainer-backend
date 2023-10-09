@@ -62,8 +62,8 @@ var app = builder.Build();
 //app.UseSentryTracing();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI(options =>
 {
@@ -71,7 +71,7 @@ var app = builder.Build();
     options.RoutePrefix = string.Empty;
 });
     app.UseExceptionHandler("/error");
-//}
+}
 
 //app.UseHttpsRedirection();
 
