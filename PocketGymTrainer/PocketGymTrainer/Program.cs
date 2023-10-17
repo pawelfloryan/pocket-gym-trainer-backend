@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
 using PocketGymTrainer.Services.Photos;
 using PocketGymTrainer.Services.UserStats;
+using PocketGymTrainer.Services.PreparedExercises;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,15 +30,15 @@ builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfi
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
 
-var tokenValidationParameter =  new TokenValidationParameters();
+var tokenValidationParameter = new TokenValidationParameters();
 
-builder.Services.AddAuthentication(options => 
+builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-    .AddJwtBearer(jwt => 
+    .AddJwtBearer(jwt =>
     {
         jwt.SaveToken = true;
         jwt.TokenValidationParameters = tokenValidationParameter;
@@ -52,6 +53,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
+builder.Services.AddScoped<IPreparedExerciseService, PreparedExerciseService>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 builder.Services.AddScoped<IUserStatsService, UserStatsService>();
 builder.Services.AddScoped<IStorageProvider, StorageProvider>();
