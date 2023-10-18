@@ -31,6 +31,14 @@ public static class Errors
         );
     }
 
+    public static class PreparedExercise
+    {
+        public static Error NotFound => Error.NotFound(
+            code: "PreparedExercise.NotFound",
+            description: "Prepared exercise not found"
+        );
+    }
+
     public static class Workout
     {
         public static Error NotFound => Error.NotFound(

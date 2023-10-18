@@ -27,10 +27,10 @@ public class PreparedExerciseController : ApiController
         _context = context;
     }
 
-    [HttpGet]
-    public IActionResult GetExercise()
+    [HttpGet("position")]
+    public IActionResult GetExercise([FromQuery(Name = "position")] int position = 0)
     {
-        ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = _preparedExerciseService.GetPreparedExerciseList();
+        ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = _preparedExerciseService.GetPreparedExerciseList(position);
 
         List<PreparedExercise> preparedExercises = getPreparedExerciseResult.Value;
         _preparedExerciseService.removeData();

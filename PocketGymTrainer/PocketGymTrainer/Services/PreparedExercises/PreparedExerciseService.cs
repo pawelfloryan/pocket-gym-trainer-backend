@@ -15,15 +15,16 @@ public class PreparedExerciseService : IPreparedExerciseService
     }
 
     private static readonly Dictionary<Guid, PreparedExercise> _preparedExercises = new();
+    const int recordTake = 25;
 
     public void removeData()
     {
         _preparedExercises.Clear();
     }
 
-    public ErrorOr<List<PreparedExercise>> GetPreparedExerciseList()
+    public ErrorOr<List<PreparedExercise>> GetPreparedExerciseList(int position)
     {
-        List<PreparedExercise> preparedExerciseList = _context.PreparedExercise.ToList();
+        List<PreparedExercise> preparedExerciseList = _context.PreparedExercise.OrderBy(e => e.MuscleGroup).Skip(position).Take(recordTake).ToList();
 
         foreach (var element in preparedExerciseList)
         {
@@ -34,6 +35,6 @@ public class PreparedExerciseService : IPreparedExerciseService
         {
             return preparedExerciseList;
         }
-        return Errors.Exercise.NotFound;
+        return Errors.PreparedExercise.NotFound;
     }
 }
