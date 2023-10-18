@@ -27,7 +27,7 @@ public class PreparedExerciseController : ApiController
         _context = context;
     }
 
-    [HttpGet("position")]
+    [HttpGet]
     public IActionResult GetExercise([FromQuery(Name = "position")] int position = 0)
     {
         ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = _preparedExerciseService.GetPreparedExerciseList(position);

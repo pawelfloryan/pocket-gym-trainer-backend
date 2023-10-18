@@ -82,7 +82,6 @@ public class ExerciseController : ApiController
 
         var exercise = requestToExerciseResult.Value;
         ErrorOr<UpsertedExercise> upsertExerciseResult = _exerciseService.UpsertExercise(exercise);
-        Console.WriteLine(upsertExerciseResult.Value.isNewelyCreated);
 
         var existingExercise = _context.Exercise.Find(exercise.Id);
 
@@ -97,7 +96,7 @@ public class ExerciseController : ApiController
         {
             _context.Entry(existingExercise).CurrentValues.SetValues(exercise);
             await _context.SaveChangesAsync();
-            
+
             _exerciseService.removeData();
         }
 

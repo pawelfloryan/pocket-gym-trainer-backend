@@ -24,7 +24,7 @@ public class PreparedExerciseService : IPreparedExerciseService
 
     public ErrorOr<List<PreparedExercise>> GetPreparedExerciseList(int position)
     {
-        List<PreparedExercise> preparedExerciseList = _context.PreparedExercise.OrderBy(e => e.MuscleGroup).Skip(position).Take(recordTake).ToList();
+        List<PreparedExercise> preparedExerciseList = _context.PreparedExercise.OrderBy(e => e.Id).Skip(position).Take(recordTake).ToList();
 
         foreach (var element in preparedExerciseList)
         {
