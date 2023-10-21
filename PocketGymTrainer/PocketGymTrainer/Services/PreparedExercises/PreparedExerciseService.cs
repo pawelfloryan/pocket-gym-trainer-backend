@@ -1,4 +1,5 @@
 using ErrorOr;
+using Microsoft.EntityFrameworkCore;
 using PocketGymTrainer.Data;
 using PocketGymTrainer.Models;
 using PocketGymTrainer.ServiceErrors;
@@ -22,9 +23,9 @@ public class PreparedExerciseService : IPreparedExerciseService
         _preparedExercises.Clear();
     }
 
-    public ErrorOr<List<PreparedExercise>> GetPreparedExerciseList(int position)
+    public async Task<ErrorOr<List<PreparedExercise>>> GetPreparedExerciseList(int position)
     {
-        List<PreparedExercise> preparedExerciseList = _context.PreparedExercise.OrderBy(e => e.Id).Skip(position).Take(recordTake).ToList();
+        List<PreparedExercise> preparedExerciseList = await _context.PreparedExercise.OrderBy(e => e.Id).Skip(position).Take(recordTake).ToListAsync();
 
         foreach (var element in preparedExerciseList)
         {
@@ -35,6 +36,7 @@ public class PreparedExerciseService : IPreparedExerciseService
         {
             return preparedExerciseList;
         }
+
         return Errors.PreparedExercise.NotFound;
     }
 }

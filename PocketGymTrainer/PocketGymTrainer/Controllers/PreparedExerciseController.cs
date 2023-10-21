@@ -28,9 +28,10 @@ public class PreparedExerciseController : ApiController
     }
 
     [HttpGet]
-    public IActionResult GetExercise([FromQuery(Name = "position")] int position = 0)
+    public async Task<IActionResult> GetExercise([FromQuery(Name = "position")] int position = 0)
     {
-        ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = _preparedExerciseService.GetPreparedExerciseList(position);
+        _preparedExerciseService.removeData();
+        ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = await _preparedExerciseService.GetPreparedExerciseList(position);
 
         List<PreparedExercise> preparedExercises = getPreparedExerciseResult.Value;
         _preparedExerciseService.removeData();
