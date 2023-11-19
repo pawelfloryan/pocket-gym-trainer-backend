@@ -34,7 +34,6 @@ public class PreparedExerciseController : ApiController
         ErrorOr<List<PreparedExercise>> getPreparedExerciseResult = await _preparedExerciseService.GetPreparedExerciseList(position);
 
         List<PreparedExercise> preparedExercises = getPreparedExerciseResult.Value;
-        _preparedExerciseService.removeData();
 
         return getPreparedExerciseResult.Match(
             preparedExercise => Ok(MapPreparedExerciseListResponse(preparedExercises)),
