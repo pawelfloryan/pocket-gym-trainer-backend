@@ -1,4 +1,5 @@
-@id = 329c8676-446e-4c4f-93fc-16dd91773782
+@id = 50f3c599-34b0-4c69-b02b-39ce7cc39ce0
+@sectionId = 30921345-e0bf-4ca3-a926-f6f28750dad4
 
-GET http://192.168.1.107:8088/exercises/{{id}}
+GET http://localhost:8088/exercises/{{id}}/{{sectionId}}
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdkNmUwN2Q1LTc5MTktNDE4NS04MDE2LTdmMWIwMDE3MTczOSIsIm5hbWUiOiJsaW51c0B0b3J3YWxkcy5wbCIsImVtYWlsIjoibGludXNAdG9yd2FsZHMucGwiLCJqdGkiOiJlNmUwOTZmYS1kYjViLTRiZDgtOGNkNy1hMmY0MWI2YmVjNDgiLCJpYXQiOjE2ODU3MzYzNTYsIm5iZiI6MTY4NTczNjM1NiwiZXhwIjoxNjg1NzM5OTU2fQ.k5NOVb3_m9ZHqIEEomzxTEezuaGk-wDs_-Tn70fE69U

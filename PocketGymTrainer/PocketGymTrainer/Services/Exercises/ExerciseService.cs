@@ -17,6 +17,16 @@ public class ExerciseService : IExerciseService
     private static readonly Dictionary<Guid, Exercise> _exercises = new();
     private static readonly Dictionary<Guid, Exercise> _exercisesCreated = new();
 
+    public Dictionary<Guid, Exercise> addData(Exercise exercise)
+    {
+        var allExercises = _context.Exercise.Where(e => e.UserId == exercise.UserId).ToList();
+        foreach (var element in allExercises)
+        {
+            _exercises.Add(element.Id, element);
+        }
+        return _exercises;
+    }
+
     public ErrorOr<Created> CreateExercise(Exercise exercise)
     {
         addData(exercise);
@@ -32,25 +42,15 @@ public class ExerciseService : IExerciseService
         }
     }
 
-    public Dictionary<Guid, Exercise> addData(Exercise exercise)
-    {
-        var allExercises = _context.Exercise.Where(e => e.UserId == exercise.UserId).ToList();
-        foreach (var element in allExercises)
-        {
-            _exercises.Add(element.Id, element);
-        }
-        return _exercises;
-    }
-
     public void removeData()
     {
         _exercises.Clear();
     }
 
-    public ErrorOr<List<Exercise>> GetExercise(Guid userId)
+    public ErrorOr<List<Exercise>> GetExercise(Guid userId, string sectionId)
     {
         List<Exercise> exerciseList =
-        _context.Exercise.Where(e => e.UserId == userId.ToString()).ToList();
+        _context.Exercise.Where(e => e.UserId == userId.ToString()).Where(e => e.SectionId == sectionId).ToList();
 
         foreach (var element in exerciseList)
         {

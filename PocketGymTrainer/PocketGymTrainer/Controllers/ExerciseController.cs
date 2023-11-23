@@ -56,10 +56,10 @@ public class ExerciseController : ApiController
         );
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetExercise(Guid id)
+    [HttpGet("{id:guid}/{sectionId}")]
+    public IActionResult GetExercise(Guid id, string sectionId)
     {
-        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(id);
+        ErrorOr<List<Exercise>> getExerciseResult = _exerciseService.GetExercise(id, sectionId);
 
         List<Exercise> exercises = getExerciseResult.Value;
         _exerciseService.removeData();
