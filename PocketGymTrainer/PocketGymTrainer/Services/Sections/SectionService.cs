@@ -35,17 +35,7 @@ public class SectionService : ISectionService
 
     public Dictionary<Guid, Section> addData(Section section)
     {
-        var allSections = _context.Section.Where(e => e.UserId == section.UserId).ToList();
-        foreach (var element in allSections)
-        {
-            _sections.Add(element.Id, element);
-        }
-        return _sections;
-    }
-
-    public Dictionary<Guid, Section> addGetData()
-    {
-        var allSections = _context.Section.ToList();
+        var allSections = _context.Section.Where(s => s.UserId == section.UserId).ToList();
         foreach (var element in allSections)
         {
             _sections.Add(element.Id, element);
@@ -58,10 +48,15 @@ public class SectionService : ISectionService
         _sections.Clear();
     }
 
-    public ErrorOr<List<Section>> GetSection()
+    public ErrorOr<List<Section>> GetSection(Guid userId)
     {
-        addGetData();
-        List<Section> sectionList = _sections.Values.ToList();
+        List<Section> sectionList = _context.Section.Where(s => s.UserId == userId.ToString()).ToList();
+
+        foreach (var element in sectionList)
+        {
+            _sections.Add(element.Id, element);
+        }
+
         if (_sections.Count > 0)
         {
             return sectionList;
@@ -71,6 +66,7 @@ public class SectionService : ISectionService
 
     public ErrorOr<UpsertedSection> UpsertSection(Section section)
     {
+        addData(section);
         var isNewelyCreated = !_sections.ContainsKey(section.Id);
         _sections[section.Id] = section;
 
@@ -79,10 +75,16 @@ public class SectionService : ISectionService
 
     public ErrorOr<Deleted> DeleteSection(Guid id)
     {
-        addGetData();
-        var section = _sections[id];
+        Section? section = _context.Section.FirstOrDefault(s => s.Id == id);
+        if (section == null)
+        {
+            return Errors.Exercise.NotFound;
+        }
+        addData(section);
+
+        var element = _sections[id];
         _sections.Remove(id);
-        _context.Remove(section);
+        _context.Remove(element);
 
         return Result.Deleted;
     }

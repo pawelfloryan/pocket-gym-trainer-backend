@@ -20,7 +20,7 @@ public class SectionController : ApiController
     private readonly ApiDbContext _context;
 
     public SectionController(
-        ISectionService sectionService, 
+        ISectionService sectionService,
         ILogger<SectionController> logger,
         ApiDbContext context
         )
@@ -29,7 +29,7 @@ public class SectionController : ApiController
         _logger = logger;
         _context = context;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateSection(CreateSectionRequest request)
     {
@@ -47,10 +47,10 @@ public class SectionController : ApiController
         {
             return Problem(createdSectionResult.Errors);
         }
-        
+
         _context.Add(section);
         await _context.SaveChangesAsync();
-        
+
         _sectionService.removeData();
 
         return requestToSectionResult.Match(
@@ -59,10 +59,10 @@ public class SectionController : ApiController
         );
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetSection()
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetSection(Guid id)
     {
-        ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection();
+        ErrorOr<List<Section>> getSectionResult = _sectionService.GetSection(id);
         var allSections = await _context.Section.ToListAsync();
 
         _sectionService.removeData();
@@ -78,14 +78,14 @@ public class SectionController : ApiController
     {
         ErrorOr<Section> requestToSectionResult = Section.From(id, request);
 
-        if(requestToSectionResult.IsError)
+        if (requestToSectionResult.IsError)
         {
             return Problem(requestToSectionResult.Errors);
         }
 
         var section = requestToSectionResult.Value;
         ErrorOr<UpsertedSection> upsertSectionResult = _sectionService.UpsertSection(section);
-        
+
         _context.Update(section);
         await _context.SaveChangesAsync();
 
@@ -102,7 +102,7 @@ public class SectionController : ApiController
     {
         ErrorOr<Deleted> deleteSectionResult = _sectionService.DeleteSection(id);
         await _context.SaveChangesAsync();
-        
+
         _sectionService.removeData();
 
         return deleteSectionResult.Match(
@@ -124,7 +124,7 @@ public class SectionController : ApiController
     private static List<SectionResponse> MapSectionListResponseAsync(List<Section> sectionList)
     {
         List<SectionResponse> responseList = new();
-        foreach(Section section in sectionList)
+        foreach (Section section in sectionList)
         {
             SectionResponse response = new SectionResponse(
                 section.Id,
